@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f ="jakarta.faces.core"
+                template="template.xhtml">
+    <ui:define name="titulo">Cadastro de Música</ui:define>
+    <ui:define name="conteudo">
+        <h:outputLabel value="Cadastro de Música"/>
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="5">
+
+                <h:outputLabel value="Nome da música:" for="nome" />
+                <h:inputText id="nome" label="nome" value="#{cadastroMusicaBean.musica.nome}">
+                    <f:validateLength maximum="100" />
+                    <f:validateRequired/>
+                </h:inputText>
+                <h:message for ="nome"/>
+
+                <h:outputLabel value="Gênero:" for="genero" />
+                <h:selectOneListbox id ="genero" label="genero"  value="#{cadastroMusicaBean.idGeneroSelecionado}">
+                    <f:selectItems value="#{cadastroMusicaBean.generos}"
+                                   var="g"
+                                   itemValue="#{g.id}"
+                                   itemLabel="#{g.nome}" />
+                    <f:validateRequired/>
+                </h:selectOneListbox>
+                <h:message for ="genero"/>
+            </h:panelGrid>
+            <h:commandButton value="Cadastrar" action="#{cadastroMusicaBean.cadastrarMusica()}" />
+        </h:form>
+        <h:outputLabel value="#{cadastroMusicaBean.mensagem}"/>
+    </ui:define>
+</ui:composition>
+
