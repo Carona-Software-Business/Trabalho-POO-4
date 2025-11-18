@@ -4,6 +4,9 @@ beans\EdicaoMusicaBean.class
 repository\MusicaRepositoryJPA.class
 repository\MusicaRepository.class
 repository\GeneroRepositoryJPA.class
+beans\UsuarioBean.class
+repository\UsuarioRepository.class
+repository\UsuarioRepositoryJPA.class
 beans\CadastroMusicaBean.class
 repository\GenericRepository.class
 repository\GeneroRepository.class
@@ -16,3 +19,4 @@ conf\JakartaRestConfiguration.class
 beans\GenerosBean.class
 conf\JakartaEE11Resource.class
 entity\Musica.class
+beans\AdminInicializador.class
