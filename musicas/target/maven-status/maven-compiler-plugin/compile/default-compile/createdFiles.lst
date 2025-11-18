@@ -1,7 +1,7 @@
 entity\Genero.class
 repository\GenericRepositoryJPA.class
-repository\MusicaRepositoryJPA.class
 beans\EdicaoMusicaBean.class
+repository\MusicaRepositoryJPA.class
 repository\MusicaRepository.class
 repository\GeneroRepositoryJPA.class
 beans\CadastroMusicaBean.class
@@ -9,6 +9,8 @@ repository\GenericRepository.class
 repository\GeneroRepository.class
 filters\UTF8Filter.class
 beans\MusicasBean.class
+entity\Banda.class
+entity\Usuario.class
 beans\CadastroGeneroBean.class
 conf\JakartaRestConfiguration.class
 beans\GenerosBean.class
