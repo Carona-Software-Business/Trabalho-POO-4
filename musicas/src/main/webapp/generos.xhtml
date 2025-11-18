@@ -8,27 +8,49 @@
     <ui:define name="titulo">Lista de Gêneros</ui:define>
     <ui:define name="conteudo">
         <h:form>
+            <!-- Busca por nome -->
             <h:panelGrid columns="3" cellpadding="5">
                 <h:outputLabel for="nome" value="Busca por nome:" />
                 <h:inputText id="nome" value="#{generosBean.nomeBusca}"/>
                 <h:commandButton value="Buscar" action="#{generosBean.buscarPorNomeParcial()}"/>
             </h:panelGrid>
+
             <h:outputText value ="#{generosBean.mensagem}"/>
+
+            <!-- Tabela de gêneros -->
             <h:dataTable value="#{generosBean.generos}" var="g" border="1" styleClass="music-table">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
-                        #{g.id}
+                    #{g.id}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Nome</f:facet>
+                    <!-- Link para página de músicas do gênero -->
+                    <h:outputLink value="musicasPorGenero.xhtml?nomeGenero=#{g.nome}" target="_blank">
                         #{g.nome}
+                    </h:outputLink>
+                    <!-- ATENÇÃO: precisa criar a página de músicas filtradas por gênero -->
                 </h:column>
                 <h:column>
                     <f:facet name="header">Ações</f:facet>
-                    <h:commandButton value="Remover" action="#{generosBean.removerGenero(g)}"/>
+                    
+                    <!-- Apenas administradores podem editar/remover -->
+                    <h:panelGroup rendered="#{usuarioBean.admin}">
+                        <h:commandButton value="Editar" action="#{generosBean.editarGenero(g)}"/>
+                        <!-- ATENÇÃO: precisa criar a página de edição de gênero -->
+                        
+                        <h:commandButton value="Remover" 
+                                         action="#{generosBean.removerGenero(g)}"
+                                         rendered="#{empty g.musicas}"/>
+                    </h:panelGroup>
                 </h:column>
             </h:dataTable>
+
+            <!-- Listar todos -->
             <h:commandButton value="Listar todos" action="#{generosBean.listar()}"/>
+
+            <!-- Cadastro de novo gênero -->
+            <h:commandButton value="Cadastrar novo gênero" action="cadastroGenero.xhtml"/>
         </h:form>
     </ui:define>
 </ui:composition>

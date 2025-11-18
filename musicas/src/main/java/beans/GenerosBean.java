@@ -64,5 +64,9 @@ public class GenerosBean implements Serializable {
     public String getMensagem() {
         return mensagem;
     }
+    
+    public String selecionarGenero(Genero genero){
+        return "musicasPorGenero?faces-redirect=true&nomeGenero=" + genero.getNome();
+    }
 
 }

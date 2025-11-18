@@ -12,6 +12,7 @@ beans\MusicasBean.class
 entity\Banda.class
 entity\Usuario.class
 beans\CadastroGeneroBean.class
+beans\MusicasPorGeneroBean.class
 conf\JakartaRestConfiguration.class
 beans\GenerosBean.class
 conf\JakartaEE11Resource.class
