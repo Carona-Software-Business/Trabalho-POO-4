@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Genero {
@@ -14,6 +16,9 @@ public class Genero {
 
     @Column(unique = true)
     private String nome;
+    
+    @OneToMany(mappedBy = "genero")
+    private List<Musica> musicas;
 
     public long getId() {
         return id;
@@ -36,4 +41,7 @@ public class Genero {
         return nome;
     }
 
+    public List<Musica> getMusicas() {
+        return musicas;
+    }
 }

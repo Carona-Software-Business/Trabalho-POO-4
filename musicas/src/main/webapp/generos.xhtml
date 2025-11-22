@@ -25,11 +25,9 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Nome</f:facet>
-                    <!-- Link para página de músicas do gênero -->
                     <h:outputLink value="musicasPorGenero.xhtml?nomeGenero=#{g.nome}" target="_blank">
                         #{g.nome}
                     </h:outputLink>
-                    <!-- ATENÇÃO: precisa criar a página de músicas filtradas por gênero -->
                 </h:column>
                 <h:column>
                     <f:facet name="header">Ações</f:facet>

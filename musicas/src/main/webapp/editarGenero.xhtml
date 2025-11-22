@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                template="template.xhtml">
+    <ui:define name="titulo">Editar Gênero</ui:define>
+    <ui:define name="conteudo">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel for="nome" value="Novo nome:"/>
+                <h:inputText id="nome" value="#{generosBean.generoSelecionado.nome}" required="true"/>
+            </h:panelGrid>
+
+            <h:commandButton value="Salvar" action="#{generosBean.salvarEdicao()}"/>
+            <h:outputLink value="generos.xhtml">
+                Voltar para lista
+            </h:outputLink>
+            
+            <h:outputText value="#{generosBean.mensagem}" style="color:blue"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

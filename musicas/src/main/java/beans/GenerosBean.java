@@ -1,6 +1,7 @@
 package beans;
 
 import entity.Genero;
+import entity.Usuario;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -21,6 +22,11 @@ public class GenerosBean implements Serializable {
     private String nomeBusca;
 
     private String mensagem;
+    
+    @Inject
+    private UsuarioBean usuarioBean;
+    
+    private Genero generoSelecionado;
 
     @PostConstruct
     public void listar() {
@@ -41,8 +47,31 @@ public class GenerosBean implements Serializable {
     }
 
     public void removerGenero(Genero genero) {
+        if (!usuarioBean.isAdmin()) {
+            mensagem = "Apenas administradores podem remover gêneros.";
+            return;
+        }
+        if (genero.getMusicas() != null && !genero.getMusicas().isEmpty()) {
+            mensagem = "Não é possível remover: existem músicas cadastradas nesse gênero.";
+            return;
+        }
         generoRepository.remover(genero);
         listar();
+        mensagem = "Gênero removido com sucesso!";
+    }
+    
+    public String editarGenero(Genero genero) {
+        this.generoSelecionado = genero;
+        return "editarGenero?faces-redirect=true";
+    }
+    
+    public void salvarEdicao() {
+        try {
+            generoRepository.salvar(generoSelecionado);
+            mensagem = "Nome do gênero atualizado com sucesso!";
+        } catch (Exception e) {
+            mensagem = "Erro ao atualizar gênero!";
+        }
     }
 
     public List<Genero> getGeneros() {
@@ -68,5 +97,8 @@ public class GenerosBean implements Serializable {
     public String selecionarGenero(Genero genero){
         return "musicasPorGenero?faces-redirect=true&nomeGenero=" + genero.getNome();
     }
-
+    
+    public Genero getGeneroSelecionado() {
+        return generoSelecionado;
+    }
 }
