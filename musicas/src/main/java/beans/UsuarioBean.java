@@ -83,5 +83,19 @@ public class UsuarioBean implements Serializable {
         }
     }
     
+    public String atualizarNome() {
+        Usuario usuarioBanco = 
+                usuarioRepository.buscar(usuarioLogado.getLogin(), usuarioLogado.getSenha());
+        
+        usuarioBanco.setNome(nome);
+        
+        usuarioRepository.atualizar(usuarioBanco);
+        
+        usuarioLogado = 
+                usuarioRepository.buscar(usuarioLogado.getLogin(), usuarioLogado.getSenha());
+        
+        return "inicio.xhtml";
+    }
+    
     
 }
