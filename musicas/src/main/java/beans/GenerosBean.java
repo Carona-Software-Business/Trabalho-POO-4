@@ -47,7 +47,7 @@ public class GenerosBean implements Serializable {
     }
 
     public void removerGenero(Genero genero) {
-        if (!usuarioBean.isAdmin()) {
+        if (!usuarioBean.getUsuarioLogado().isAdministrador()) {
             mensagem = "Apenas administradores podem remover gêneros.";
             return;
         }

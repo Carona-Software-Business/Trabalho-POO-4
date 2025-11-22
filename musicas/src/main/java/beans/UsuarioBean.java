@@ -45,6 +45,10 @@ public class UsuarioBean implements Serializable {
         return musicasFavoritas;
     }
 
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
