@@ -23,6 +23,8 @@ public class UsuarioBean implements Serializable {
     private String login;
     private String senha;
     
+    private String novaSenha;
+    
     private List<Musica> musicasFavoritas;
 
     public String getNome() {
@@ -47,6 +49,14 @@ public class UsuarioBean implements Serializable {
 
     public Usuario getUsuarioLogado() {
         return usuarioLogado;
+    }
+
+    public String getNovaSenha() {
+        return novaSenha;
+    }
+
+    public void setNovaSenha(String novaSenha) {
+        this.novaSenha = novaSenha;
     }
 
     public void setNome(String nome) {
@@ -93,6 +103,31 @@ public class UsuarioBean implements Serializable {
         
         usuarioLogado = 
                 usuarioRepository.buscar(usuarioLogado.getLogin(), usuarioLogado.getSenha());
+        
+        return "inicio.xhtml";
+    }
+    
+    public String atualizarSenha() {
+        System.out.println("--------------------\n"
+                + "senha: " + senha + "\nNova senha: " + novaSenha 
+                + "\nSenha cadastrada: " + usuarioLogado.getSenha()
+                + "\n--------------------------");
+        
+        if(senha.equals(usuarioLogado.getSenha())) {
+            System.out.println("------------------\n"
+                    + "Atualizar Senha\n"
+                    + "----------------------");
+            
+            Usuario usuarioBanco = 
+                    usuarioRepository.buscar(usuarioLogado.getLogin(), usuarioLogado.getSenha());
+            
+            usuarioBanco.setSenha(novaSenha);
+            
+            usuarioRepository.atualizar(usuarioBanco);
+            
+            usuarioLogado = 
+                usuarioRepository.buscar(usuarioLogado.getLogin(), novaSenha);
+        }
         
         return "inicio.xhtml";
     }

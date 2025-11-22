@@ -10,6 +10,7 @@
     <ui:define name="conteudo">
         <h2>Bem Vindo, #{usuarioBean.usuarioLogado.nome}</h2>
         <p>Login: #{usuarioBean.usuarioLogado.login}</p>
+        <p>Veja suas <h:link value=" músicas favoritas" outcome="musicas"/></p>
         
         <h3>Editar nome</h3>
         <h:form>
@@ -17,6 +18,17 @@
             <h:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
 
             <h:commandButton value="Atualizar" action="#{usuarioBean.atualizarNome()}"/>
+        </h:form>
+        
+        <h3>Editar senha</h3>
+        <h:form>
+            <h:outputLabel value="Senha Atual:" for="senha"/>
+            <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true"/>
+            
+            <h:outputLabel value="Nova Senha:" for="novaSenha"/>
+            <h:inputSecret id="novaSenha" value="#{usuarioBean.novaSenha}" required="true"/>
+
+            <h:commandButton value="Atualizar" action="#{usuarioBean.atualizarSenha()}"/>
         </h:form>
     </ui:define>
 
