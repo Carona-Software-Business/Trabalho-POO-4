@@ -7,7 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import repository.UsuarioRepositoryJPA;
+import repository.UsuarioRepository;
 
 @Named
 @SessionScoped
@@ -16,7 +16,7 @@ public class UsuarioBean implements Serializable {
     private Usuario usuarioLogado;
     
     @Inject
-    private UsuarioRepositoryJPA usuarioRepository;
+    private UsuarioRepository usuarioRepository;
     
     private String nome;
     

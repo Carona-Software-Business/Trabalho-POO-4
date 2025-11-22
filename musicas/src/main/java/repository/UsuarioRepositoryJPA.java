@@ -14,17 +14,19 @@ public class UsuarioRepositoryJPA
 
     @Override
     public Usuario buscar(String login, String senha) {
-        Usuario usuario = null;
         try {
-            usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha", 
+            return em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha", 
                 Usuario.class)
                 .setParameter("login", login)
                 .setParameter("senha", senha)
                 .getSingleResult();
         } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
-            return usuario;
+            System.out.println("--------------\n"
+                    + "Não existe o usuario buscado"
+                    + "\n-----------------");
+            System.out.println(ex.getMessage());
+            
+            return null;
         }
         
     }

@@ -3,26 +3,53 @@ package beans;
 import entity.Usuario;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Startup;
-import jakarta.inject.Singleton;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.inject.Inject;
+import jakarta.ejb.Singleton;
+import repository.UsuarioRepository;
 
 @Singleton
 @Startup
 public class AdminInicializador {
-    @PersistenceContext
-    private EntityManager em;
-    
+
+    @Inject
+    private UsuarioRepository usuarioRepository;
+
     @PostConstruct
     public void init() {
-        // Verifica se existem um adm
-        Long count = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.login = :login", Long.class)
-                       .setParameter("login", "admin")
-                       .getSingleResult();
-        
-        if(count == 0) {
-            Usuario adm = new Usuario("adm", "admin", "admin", true);
-            em.persist(adm);
+
+        System.out.println(">>> [AdminInicializador] Iniciando verificação do admin...");
+
+        // Checa se o repositório foi injetado
+        if (usuarioRepository == null) {
+            System.out.println(">>> [AdminInicializador] ERRO: UsuarioRepository NÃO foi injetado!");
+            return;
+        } else {
+            System.out.println(">>> [AdminInicializador] UsuarioRepository injetado com sucesso.");
         }
+
+        try {
+
+            System.out.println(">>> [AdminInicializador] Buscando admin no banco...");
+            Usuario usuarioBanco = usuarioRepository.buscar("admin", "admin");
+
+            if (usuarioBanco == null) {
+                System.out.println(">>> [AdminInicializador] Admin NÃO encontrado. Criando um novo...");
+
+                Usuario novoAdmin = new Usuario("admin", "admin", "admin", true);
+
+                usuarioRepository.salvar(novoAdmin);
+
+                System.out.println(">>> [AdminInicializador] Admin criado com sucesso.");
+            } else {
+                System.out.println(">>> [AdminInicializador] Admin já existe no banco. (ID = "
+                    + usuarioBanco.getId() + ")");
+            }
+
+        } catch (Exception ex) {
+            System.out.println(">>> [AdminInicializador] ERRO inesperado ao verificar/criar admin:");
+            ex.printStackTrace();
+        }
+
+        System.out.println(">>> [AdminInicializador] Finalizado.");
     }
 }
