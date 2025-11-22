@@ -29,6 +29,9 @@
             <h:inputSecret id="novaSenha" value="#{usuarioBean.novaSenha}" required="true"/>
 
             <h:commandButton value="Atualizar" action="#{usuarioBean.atualizarSenha()}"/>
+            
+            <h:messages globalOnly="true" showDetail="false" style="color:red;" />
+            <h:messages globalOnly="true" showSummary="false" showDetail="true" style="color:red;" />
         </h:form>
     </ui:define>
 

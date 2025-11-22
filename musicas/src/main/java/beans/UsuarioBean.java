@@ -3,6 +3,8 @@ package beans;
 import entity.Musica;
 import entity.Usuario;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
@@ -76,6 +78,11 @@ public class UsuarioBean implements Serializable {
     }
     
     public String cadastrar() {
+        if(login.length() > 32 || senha.length() > 32) {
+            mensagemErroTamanho();
+            return "";
+        }
+        
         Usuario usuarioNovo = new Usuario(nome, login, senha, false);
         
         usuarioRepository.salvar(usuarioNovo);
@@ -87,6 +94,7 @@ public class UsuarioBean implements Serializable {
         usuarioLogado = usuarioRepository.buscar(login, senha);
         
         if(usuarioLogado == null) {
+            mensagemErroLogin();
             return "";
         } else {
             return "inicio.xhtml";
@@ -108,15 +116,12 @@ public class UsuarioBean implements Serializable {
     }
     
     public String atualizarSenha() {
-        System.out.println("--------------------\n"
-                + "senha: " + senha + "\nNova senha: " + novaSenha 
-                + "\nSenha cadastrada: " + usuarioLogado.getSenha()
-                + "\n--------------------------");
-        
         if(senha.equals(usuarioLogado.getSenha())) {
-            System.out.println("------------------\n"
-                    + "Atualizar Senha\n"
-                    + "----------------------");
+            
+            if(novaSenha.length() > 32) {
+                mensagemErroTamanho();
+                return "";
+            }
             
             Usuario usuarioBanco = 
                     usuarioRepository.buscar(usuarioLogado.getLogin(), usuarioLogado.getSenha());
@@ -127,9 +132,33 @@ public class UsuarioBean implements Serializable {
             
             usuarioLogado = 
                 usuarioRepository.buscar(usuarioLogado.getLogin(), novaSenha);
+        } else {
+            mensagemErroNovaSenha();
+            return "";
         }
         
         return "inicio.xhtml";
+    }
+    
+    private void mensagemErroTamanho() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                "Erro!", "O login e a senha devem ter no máximo 32 caracteres");
+        
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    private void mensagemErroLogin() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                "Erro de login", "Login ou senha incorretos");
+        
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    private void mensagemErroNovaSenha() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                "Erro!", "A senha digita está errada!");
+        
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     
