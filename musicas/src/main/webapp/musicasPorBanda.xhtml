@@ -5,12 +5,12 @@
                 xmlns:ui="jakarta.faces.facelets"
                 template="template.xhtml"
                 xmlns:f="jakarta.faces.core">
-    <ui:define name="titulo">Músicas por Gênero</ui:define>
+    <ui:define name="titulo">Músicas por Banda</ui:define>
     <ui:define name="conteudo">
         <h:form>
-            <h:outputText value="#{musicasPorGeneroBean.mensagem}" style="font-weight:bold"/>
+            <h:outputText value="#{musicasPorBandaBean.mensagem}" style="font-weight:bold"/>
 
-            <h:dataTable value="#{musicasPorGeneroBean.musicas}" var="m" border="1" styleClass="music-table">
+            <h:dataTable value="#{musicasPorBandaBean.musicas}" var="m" border="1" styleClass="music-table">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     #{m.id}
@@ -19,10 +19,14 @@
                     <f:facet name="header">Nome</f:facet>
                     #{m.nome}
                 </h:column>
+                <h:column>
+                    <f:facet name="header">Banda</f:facet>
+                    #{m.banda.nome}
+                </h:column>
             </h:dataTable>
 
-            <h:outputLink value="generos.xhtml">
-                Voltar para gêneros
+            <h:outputLink value="bandas.xhtml">
+                Voltar para bandas
             </h:outputLink>
         </h:form>
     </ui:define>
