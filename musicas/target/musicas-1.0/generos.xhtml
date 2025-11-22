@@ -33,7 +33,7 @@
                     <f:facet name="header">Ações</f:facet>
                     
                     <!-- Apenas administradores podem editar/remover -->
-                    <h:panelGroup rendered="#{usuarioBean.admin}">
+                    <h:panelGroup rendered="#{usuarioBean.usuarioLogado.administrador}">
                         <h:commandButton value="Editar" action="#{generosBean.editarGenero(g)}"/>
                         <!-- ATENÇÃO: precisa criar a página de edição de gênero -->
                         
