@@ -1,25 +1,83 @@
 package beans;
 
+import entity.Musica;
 import entity.Usuario;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.List;
+import repository.UsuarioRepositoryJPA;
 
 @Named
 @SessionScoped
 public class UsuarioBean implements Serializable {
-
+    
     private Usuario usuarioLogado;
+    
+    @Inject
+    private UsuarioRepositoryJPA usuarioRepository;
+    
+    private String nome;
+    
+    private String login;
+    private String senha;
+    
+    private List<Musica> musicasFavoritas;
 
-    public Usuario getUsuarioLogado() {
-        return usuarioLogado;
+    public String getNome() {
+        return nome;
     }
 
-    public void setUsuarioLogado(Usuario usuarioLogado) {
-        this.usuarioLogado = usuarioLogado;
+    public String getLogin() {
+        return login;
     }
 
-    public boolean isAdmin() {
-        return usuarioLogado != null && usuarioLogado.isAdministrador();
+    public String getSenha() {
+        return senha;
     }
+    
+    public boolean isLogado() {
+        return usuarioLogado != null;
+    }
+
+    public List<Musica> getMusicasFavoritas() {
+        return musicasFavoritas;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setMusicasFavoritas(List<Musica> musicasFavoritas) {
+        this.musicasFavoritas = musicasFavoritas;
+    }
+    
+    public String cadastrar() {
+        Usuario usuarioNovo = new Usuario(nome, login, senha, false);
+        
+        usuarioRepository.salvar(usuarioNovo);
+        
+        return "login.xhtml";
+    }
+    
+    public String logar() {
+        usuarioLogado = usuarioRepository.buscar(login, senha);
+        
+        if(usuarioLogado == null) {
+            return "";
+        } else {
+            return "inicio.xhtml";
+        }
+    }
+    
+    
 }

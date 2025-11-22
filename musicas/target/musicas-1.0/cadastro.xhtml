@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+    <h:head>
+        <title>Cadastro</title>
+    </h:head>
+    <h:body>
+        <h1>Cadastro</h1>
+        
+        <p>Já tem um cadastro? Então faça <h:link value=" login" outcome="login"/></p>
+        
+        <h:form>
+            <h:outputLabel value="Nome: " for="nome"/>
+            <h:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
+            
+            <h:outputLabel value="Login:" for="login"/>
+            <h:inputText id="login" value="#{usuarioBean.login}" required="true"/>
+
+            <h:outputLabel value="Senha:" for="senha"/>
+            <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true"/>
+
+            <h:commandButton value="Cadastrar" action="#{usuarioBean.cadastrar()}"/>
+        </h:form>   
+    </h:body>
+</html>

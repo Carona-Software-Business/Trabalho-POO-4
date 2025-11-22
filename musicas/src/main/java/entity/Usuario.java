@@ -4,9 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
+@Table(name = "USUARIO")
 public class Usuario {
     
     @Id
@@ -15,21 +18,28 @@ public class Usuario {
     
     private String nome;
     
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String login;
     
+    @Column(nullable = false)
     private String senha;
     
     private boolean administrador;
     
+    @ManyToMany
     private List<Musica> musicasFavoritas;
+    
+    public Usuario(){};
+
+    public Usuario(String nome, String login, String senha, boolean isAdm) {
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+        this.administrador = isAdm;
+    }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -58,10 +68,6 @@ public class Usuario {
 
     public boolean isAdministrador() {
         return administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
     }
 
     public List<Musica> getMusicasFavoritas() {

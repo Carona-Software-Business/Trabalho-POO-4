@@ -127,6 +127,22 @@
     </h:head>
 
     <h:body>
+        
+        <h:panelGroup rendered="#{not usuarioBean.logado}">
+            <h:messages/>
+            <h:outputText value="Erro: você precisa fazer login para acessar esta página."/>
+            <h:link value="Ir para login" outcome="login"/>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{usuarioBean.logado}">
+            <header>
+                <h1>Sistema de Músicas</h1>
+                <nav>
+                    <h:link value="Início" outcome="inicio"/>
+                    <h:link value="Músicas" outcome="musicas"/>
+                    <h:link value="Cadastrar Música" outcome="cadastroMusica"/>
+                    <h:link value="Gêneros" outcome="generos"/>
+                    <h:link value="Cadastrar Gênero" outcome="cadastroGenero"/>
 
         <header>
             <h1>Sistema de Músicas</h1>
@@ -136,18 +152,18 @@
                 <h:link value="Músicas" outcome="musicas"/>
                 <!-- <h:link value="Cadastrar Música" outcome="cadastroMusica"/> -->
 
-            </nav>
-        </header>
+            <main>
+                <ui:insert name="conteudo">
+                    <p>Bem-vindo ao Sistema de Músicas!</p>
+                </ui:insert>
+            </main>
 
-        <main>
-            <ui:insert name="conteudo">
-                <p>Bem-vindo ao Sistema de Músicas!</p>
-            </ui:insert>
-        </main>
+            <footer>
+                Sistema de músicas — 2025
+            </footer>
+        </h:panelGroup>
 
-        <footer>
-            Sistema de músicas — 2025
-        </footer>
+        
 
     </h:body>
 
