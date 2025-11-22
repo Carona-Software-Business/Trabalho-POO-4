@@ -8,6 +8,8 @@
     <h:body>
         <h1>Login</h1>
         
+        <p>Não tem um login? Então faça <h:link value=" cadastro" outcome="cadastro"/></p>
+        
         <h:form>
             <h:outputLabel value="Login:" for="login"/>
             <h:inputText id="login" value="#{usuarioBean.login}" required="true"/>
