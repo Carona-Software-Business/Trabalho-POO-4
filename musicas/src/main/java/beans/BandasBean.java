@@ -130,6 +130,10 @@ public class BandasBean implements Serializable {
         }
     }
 
+    public void setNomeBanda(String nomeBanda) {
+        this.nomeBanda = nomeBanda;
+    }
+
     public String getNomeBanda() {
         return nomeBanda;
     }
