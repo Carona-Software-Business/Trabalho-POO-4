@@ -3,6 +3,7 @@ package beans;
 import entity.Genero;
 import entity.Usuario;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -29,10 +30,20 @@ public class GenerosBean implements Serializable {
     private Genero generoSelecionado;
 
     @PostConstruct
-    public void listar() {
-        generos = generoRepository.listar();
-        if (generos.isEmpty()) {
-            mensagem = "Nenhum gênero encontrado!";
+    public void init() {
+        listar();
+
+        String nomeParam = FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getRequestParameterMap()
+                .get("nomeGenero");
+
+        if (nomeParam != null && !nomeParam.isEmpty()) {
+            try {
+                generoSelecionado = generoRepository.buscarPorNome(nomeParam);
+            } catch (Exception e) {
+                mensagem = "Gênero não encontrado: " + nomeParam;
+            }
         }
     }
 
@@ -62,7 +73,7 @@ public class GenerosBean implements Serializable {
     
     public String editarGenero(Genero genero) {
         this.generoSelecionado = genero;
-        return "editarGenero?faces-redirect=true";
+        return "editarGenero?faces-redirect=true&nomeGenero=" + genero.getNome();
     }
     
     public void salvarEdicao() {
@@ -101,4 +112,12 @@ public class GenerosBean implements Serializable {
     public Genero getGeneroSelecionado() {
         return generoSelecionado;
     }
+    
+    public void listar() {
+        generos = generoRepository.listar();
+        if (generos.isEmpty()) {
+            mensagem = "Nenhum gênero encontrado!";
+        }
+    }
+
 }

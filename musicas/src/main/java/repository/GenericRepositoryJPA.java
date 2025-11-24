@@ -31,7 +31,7 @@ public class GenericRepositoryJPA<T> implements GenericRepository<T> {
     @Override
     @Transactional
     public void salvar(T entidade) {
-        em.persist(entidade);
+        em.merge(entidade);
     }
 
     @Override
