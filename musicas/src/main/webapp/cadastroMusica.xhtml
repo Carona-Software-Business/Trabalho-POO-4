@@ -7,30 +7,43 @@
                 template="template.xhtml">
     <ui:define name="titulo">Cadastro de Música</ui:define>
     <ui:define name="conteudo">
-        <h:outputLabel value="Cadastro de Música"/>
+        <h1>Cadastro de Música</h1>
+        
         <h:form>
             <h:panelGrid columns="3" cellpadding="5">
 
                 <h:outputLabel value="Nome da música:" for="nome" />
-                <h:inputText id="nome" label="nome" value="#{cadastroMusicaBean.musica.nome}">
+                <h:inputText id="nome" label="nome" value="#{musicasBean.nomeMusica}">
                     <f:validateLength maximum="100" />
                     <f:validateRequired/>
                 </h:inputText>
                 <h:message for ="nome"/>
 
                 <h:outputLabel value="Gênero:" for="genero" />
-                <h:selectOneListbox id ="genero" label="genero"  value="#{cadastroMusicaBean.idGeneroSelecionado}">
-                    <f:selectItems value="#{cadastroMusicaBean.generos}"
+                <h:selectOneListbox id ="genero" label="genero"  value="#{musicasBean.generoMusica}">
+                    <f:selectItems value="#{generosBean.generos}"
                                    var="g"
                                    itemValue="#{g.id}"
                                    itemLabel="#{g.nome}" />
                     <f:validateRequired/>
                 </h:selectOneListbox>
                 <h:message for ="genero"/>
+                
+                <h:outputLabel value="Banda:" for="banda" />
+                <h:selectOneListbox id ="banda" label="banda"  value="#{musicasBean.bandaMusica}">
+                    <f:selectItems value="#{bandasBean.bandas}"
+                                   var="b"
+                                   itemValue="#{b.id}"
+                                   itemLabel="#{b.nome}" />
+                    <f:validateRequired/>
+                </h:selectOneListbox>
+                <h:message for ="banda"/>
             </h:panelGrid>
-            <h:commandButton value="Cadastrar" action="#{cadastroMusicaBean.cadastrarMusica()}" />
+            
+            <h:commandButton value="Cadastrar" action="#{musicasBean.cadastrar()}" />
         </h:form>
-        <h:outputLabel value="#{cadastroMusicaBean.mensagem}"/>
+        
+        <h:outputLabel value="#{musicasBean.mensagem}"/>
     </ui:define>
 </ui:composition>
 

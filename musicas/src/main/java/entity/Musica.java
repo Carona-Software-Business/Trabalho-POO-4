@@ -22,6 +22,15 @@ public class Musica {
     @ManyToOne
     private Banda banda;
 
+    public Musica() {
+    }
+
+    public Musica(String nome, Genero genero, Banda banda) {
+        this.nome = nome;
+        this.genero = genero;
+        this.banda = banda;
+    }
+
     public long getId() {
         return id;
     }

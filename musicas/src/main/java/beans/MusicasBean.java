@@ -1,12 +1,17 @@
 package beans;
 
+import entity.Banda;
+import entity.Genero;
 import entity.Musica;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import repository.BandaRepository;
+import repository.GeneroRepository;
 import repository.MusicaRepository;
 
 @Named
@@ -15,10 +20,22 @@ public class MusicasBean implements Serializable {
 
     @Inject
     private MusicaRepository musicaRepository;
+    
+    @Inject
+    private BandaRepository bandaRepository;
+    
+    @Inject
+    private GeneroRepository generoRepository;
 
     private List<Musica> musicas;
+    
+    private long generoId;
+    
+    private long bandaId;
 
     private String nomeMusica;
+    
+    private String nomeBanda;
 
     private String nomeGenero;
 
@@ -26,12 +43,10 @@ public class MusicasBean implements Serializable {
 
     @PostConstruct
     public void listar() {
-        nomeMusica = "";
-        nomeGenero = "";
-        mensagem = "";
         musicas = musicaRepository.listar();
         if (musicas.isEmpty()) {
             mensagem = "Nenhuma música cadastrada!";
+            musicas = new ArrayList<>();
         }
     }
 
@@ -54,6 +69,35 @@ public class MusicasBean implements Serializable {
         }
         nomeGenero = "";
     }
+    
+    public void buscaPorBanda() {
+        musicas = musicaRepository.buscarPorNomeBanda(nomeBanda);
+        if (musicas.isEmpty()) {
+            mensagem = "Nenhuma música de uma banda que contenha " + nomeBanda + "!";
+        } else {
+            mensagem = "Mostrando as música de uma banda que contém: \"" + nomeBanda + "\".";
+        }
+        nomeBanda = "";
+    }
+    
+    public String cadastrar() {
+        //Banda banda = bandaRepository.b
+        
+        Musica novaMusica = new Musica(nomeMusica, null, null);
+        
+        try {
+            musicaRepository.salvar(novaMusica);
+        
+            mensagem = "Música cadastrada com sucesso"; 
+        } catch(Exception ex) {
+            System.out.println("Erro ao cadastrar musica");
+            System.out.println(ex.getMessage());
+            
+            mensagem = "Não foi possível cadastrar a música";
+        } finally {
+            return "";
+        }
+    }
 
     public void removerMusica(Musica musica) {
         musicaRepository.remover(musica);
@@ -62,6 +106,10 @@ public class MusicasBean implements Serializable {
 
     public String editarMusica(Musica musica) {
         return "edicaoMusica?faces-redirect=true&id=" + musica.getId();
+    }
+    
+    public void favoritar(Musica musica) {
+        
     }
 
     public List<Musica> getMusicas() {
@@ -88,6 +136,14 @@ public class MusicasBean implements Serializable {
         this.nomeGenero = nomeGenero;
     }
 
+    public String getNomeBanda() {
+        return nomeBanda;
+    }
+
+    public void setNomeBanda(String nomeBanda) {
+        this.nomeBanda = nomeBanda;
+    }
+    
     public String getMensagem() {
         return mensagem;
     }

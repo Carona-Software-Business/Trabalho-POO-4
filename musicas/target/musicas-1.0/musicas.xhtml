@@ -12,32 +12,54 @@
                 <h:outputLabel for="nome" value="Busca por nome:" />
                 <h:inputText id="nome" value="#{musicasBean.nomeMusica}"/>
                 <h:commandButton value="Buscar" action="#{musicasBean.buscaPorNome()}"/>
+                
                 <h:outputLabel for="genero" value="Busca por gênero:" />
                 <h:inputText id="genero" value="#{musicasBean.nomeGenero}"/>
                 <h:commandButton value="Buscar" action="#{musicasBean.buscaPorGenero()}"/>
+                
+                <h:outputLabel for="banda" value="Busca por banda:" />
+                <h:inputText id="banda" value="#{musicasBean.nomeBanda}"/>
+                <h:commandButton value="Buscar" action="#{musicasBean.buscaPorBanda()}"/>
             </h:panelGrid>
+            
             <h:outputText value ="#{musicasBean.mensagem}"/>
+            
             <h:dataTable value="#{musicasBean.musicas}" var="m" border="1" styleClass="music-table">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                         #{m.id}
                 </h:column>
+                
                 <h:column>
                     <f:facet name="header">Nome</f:facet>
                         #{m.nome}
                 </h:column>
+                
                 <h:column>
                     <f:facet name="header">Gênero</f:facet>
                         #{m.genero.nome}
                 </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Banda</f:facet>
+                        #{m.banda.nome}
+                </h:column>
+                
                 <h:column>
                     <f:facet name="header">Ações</f:facet>
-                    <h:commandButton value="Remover" action="#{musicasBean.removerMusica(m)}"/>
+                    <h:commandButton value="Favoritar" action="#{musicasBean.favoritar(m)}"/>
                     
-                    <h:commandButton value="Editar" action="#{musicasBean.editarMusica(m)}"/>
+                    <h:panelGroup rendered="#{usuarioBean.usuarioLogado.administrador}">
+                        <h:commandButton value="Editar" action="#{musicasBean.editarMusica(m)}"/>
+                        
+                        <h:commandButton value="Remover" action="#{musicasBean.removerMusica(m)}"/>
+                    </h:panelGroup>
                 </h:column>
+                
             </h:dataTable>
+            
             <h:commandButton value="Listar todas" action="#{musicasBean.listar()}"/>
+            <h:commandButton value="Cadastrar nova música" action="cadastroMusica.xhtml"/>
         </h:form>
     </ui:define>
 </ui:composition>
