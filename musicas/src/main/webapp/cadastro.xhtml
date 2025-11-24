@@ -4,8 +4,113 @@
       xmlns:h="jakarta.faces.html">
     <h:head>
         <title>Cadastro</title>
+        
+        <style>
+    /* ====== ESTILO GERAL ====== */
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f7f8fa;
+    }
+
+    /* ==== Container centralizado ==== */
+    .form-container {
+        width: 400px;
+        margin: 60px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+        text-align: center;
+        color: #1f3b73;
+        margin-top: 0;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+    }
+
+    p {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    p a {
+        color: #6b11c9;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    p a:hover {
+        text-decoration: underline;
+    }
+
+    /* ====== Inputs ====== */
+    h\\:outputLabel {
+        display: block;
+        margin-top: 12px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 4px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        font-size: 1em;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: #6b11c9;
+        outline: none;
+        box-shadow: 0 0 3px rgba(107,17,201,0.4);
+    }
+
+    /* ====== BOTÃO ====== */
+    input[type="submit"],
+    button,
+    input[type="button"] {
+        width: 100%;
+        padding: 10px;
+        background: #6b11c9;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 18px;
+        font-size: 1em;
+        transition: 0.2s;
+    }
+
+    input[type="submit"]:hover,
+    button:hover,
+    input[type="button"]:hover {
+        background: #5412a8;
+    }
+
+    /* ====== Mensagens de erro ====== */
+    .error-messages {
+        margin-top: 15px;
+        padding: 10px;
+        background: #ffe5e5;
+        border-left: 4px solid #cc0000;
+        color: #b30000;
+        border-radius: 6px;
+        font-size: 0.9em;
+    }
+</style>
+
     </h:head>
-    <h:body>
+    <h:body class="form-container">
         <h1>Cadastro</h1>
         
         <p>Já tem um cadastro? Então faça <h:link value=" login" outcome="login"/></p>
