@@ -6,18 +6,20 @@
                 template="template.xhtml">
     <ui:define name="titulo">Cadastro de Banda</ui:define>
     <ui:define name="conteudo">
+        <<h1>Cadastro de Banda</h1>
+        
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel for="nome" value="Nome da Banda:"/>
-                <h:inputText id="nome" value="#{cadastroBandaBean.banda.nome}" required="true"/>
+                <h:inputText id="nome" value="#{bandasBean.nomeBanda}" required="true"/>
             </h:panelGrid>
 
-            <h:commandButton value="Salvar" action="#{cadastroBandaBean.salvar()}"/>
+            <h:commandButton value="Salvar" action="#{bandasBean.cadastrar()}"/>
             <h:outputLink value="bandas.xhtml">
                 Voltar para lista
             </h:outputLink>
 
-            <h:outputText value="#{cadastroBandaBean.mensagem}" style="color:blue"/>
+            <h:outputText value="#{bandasBean.mensagem}" style="color:blue"/>
         </h:form>
     </ui:define>
 </ui:composition>

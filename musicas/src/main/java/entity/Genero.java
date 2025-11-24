@@ -20,6 +20,13 @@ public class Genero {
     @OneToMany(mappedBy = "genero")
     private List<Musica> musicas;
 
+    public Genero() {
+    }
+
+    public Genero(String nome) {
+        this.nome = nome;
+    }
+
     public long getId() {
         return id;
     }

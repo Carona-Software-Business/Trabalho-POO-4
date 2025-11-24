@@ -18,6 +18,8 @@ public class BandasBean implements Serializable {
     private BandaRepository bandaRepository;
 
     private List<Banda> bandas;
+    
+    private String nomeBanda;
 
     private String nomeBusca;
 
@@ -82,6 +84,19 @@ public class BandasBean implements Serializable {
             mensagem = "Erro ao atualizar banda!";
         }
     }
+    
+    public String cadastrar() {
+        Banda novaBanda = new Banda(nomeBanda);
+        
+        try {
+            bandaRepository.salvar(novaBanda);
+            mensagem = "Banda cadastrada com sucesso!";
+        } catch (Exception e) {
+            mensagem = "Erro ao cadastrar banda!";
+        } finally {
+            return "";
+        }
+    }
 
     // Getters e Setters
     public List<Banda> getBandas() {
@@ -114,4 +129,10 @@ public class BandasBean implements Serializable {
             mensagem = "Nenhuma banda encontrada!";
         }
     }
+
+    public String getNomeBanda() {
+        return nomeBanda;
+    }
+    
+    
 }

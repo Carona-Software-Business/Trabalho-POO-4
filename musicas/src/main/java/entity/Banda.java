@@ -18,6 +18,13 @@ public class Banda {
 
     @OneToMany(mappedBy = "banda")
     private List<Musica> musicas;
+
+    public Banda() {
+    }
+
+    public Banda(String nome) {
+        this.nome = nome;
+    }
     
     public long getId() {
         return id;
