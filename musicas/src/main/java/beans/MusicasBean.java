@@ -26,9 +26,6 @@ public class MusicasBean implements Serializable {
 
     @PostConstruct
     public void listar() {
-        nomeMusica = "";
-        nomeGenero = "";
-        mensagem = "";
         musicas = musicaRepository.listar();
         if (musicas.isEmpty()) {
             mensagem = "Nenhuma música cadastrada!";
@@ -62,6 +59,10 @@ public class MusicasBean implements Serializable {
 
     public String editarMusica(Musica musica) {
         return "edicaoMusica?faces-redirect=true&id=" + musica.getId();
+    }
+    
+    public void favoritar(Musica musica) {
+        
     }
 
     public List<Musica> getMusicas() {
