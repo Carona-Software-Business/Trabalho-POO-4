@@ -18,6 +18,9 @@
             <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true"/>
 
             <h:commandButton value="Entrar" action="#{usuarioBean.logar()}"/>
+            
+            <h:messages globalOnly="true" showDetail="false" style="color:red;" />
+            <h:messages globalOnly="true" showSummary="false" showDetail="true" style="color:red;" />
         </h:form>
     </h:body>
 </html>
