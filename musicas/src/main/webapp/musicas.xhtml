@@ -16,6 +16,10 @@
                 <h:outputLabel for="genero" value="Busca por gênero:" />
                 <h:inputText id="genero" value="#{musicasBean.nomeGenero}"/>
                 <h:commandButton value="Buscar" action="#{musicasBean.buscaPorGenero()}"/>
+                
+                <h:outputLabel for="banda" value="Busca por banda:" />
+                <h:inputText id="banda" value="#{musicasBean.nomeBanda}"/>
+                <h:commandButton value="Buscar" action="#{musicasBean.buscaPorBanda()}"/>
             </h:panelGrid>
             
             <h:outputText value ="#{musicasBean.mensagem}"/>
