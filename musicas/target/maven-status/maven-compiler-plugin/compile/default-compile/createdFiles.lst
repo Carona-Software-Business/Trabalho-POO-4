@@ -18,7 +18,6 @@ repository\MusicaRepository.class
 repository\GeneroRepositoryJPA.class
 beans\UsuarioBean.class
 repository\BandaRepositoryJPA.class
-beans\CadastroMusicaBean.class
 filters\UTF8Filter.class
 beans\MusicasBean.class
 beans\CadastroGeneroBean.class
