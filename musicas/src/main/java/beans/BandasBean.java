@@ -2,7 +2,8 @@ package beans;
 
 import entity.Banda;
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.List;
 import repository.BandaRepository;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class BandasBean implements Serializable {
 
     @Inject
@@ -28,10 +29,22 @@ public class BandasBean implements Serializable {
     private Banda bandaSelecionada;
 
     @PostConstruct
-    public void listar() {
-        bandas = bandaRepository.listar();
-        if (bandas.isEmpty()) {
-            mensagem = "Nenhuma banda encontrada!";
+    public void init() {
+        listar();
+
+ 
+        String idParam = FacesContext.getCurrentInstance()
+            .getExternalContext()
+            .getRequestParameterMap()
+            .get("idBanda");
+
+        if (idParam != null) {
+            try {
+                Long id = Long.parseLong(idParam);
+                bandaSelecionada = bandaRepository.buscarPorID(id);
+            } catch (NumberFormatException e) {
+                mensagem = "ID inválido para edição.";
+            }
         }
     }
 
@@ -58,9 +71,9 @@ public class BandasBean implements Serializable {
 
     public String editarBanda(Banda banda) {
         this.bandaSelecionada = banda;
-        return "editarBanda?faces-redirect=true";
+        return "editarBanda?faces-redirect=true&idBanda=" + banda.getId();
     }
-
+    
     public void salvarEdicao() {
         try {
             bandaRepository.salvar(bandaSelecionada);
@@ -93,5 +106,12 @@ public class BandasBean implements Serializable {
 
     public Banda getBandaSelecionada() {
         return bandaSelecionada;
+    }
+    
+    public void listar() {
+        bandas = bandaRepository.listar();
+        if (bandas.isEmpty()) {
+            mensagem = "Nenhuma banda encontrada!";
+        }
     }
 }
