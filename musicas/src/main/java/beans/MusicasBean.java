@@ -26,6 +26,8 @@ public class MusicasBean implements Serializable {
     private Banda bandaMusica;
 
     private String nomeMusica;
+    
+    private String nomeBanda;
 
     private String nomeGenero;
 
@@ -60,14 +62,31 @@ public class MusicasBean implements Serializable {
         nomeGenero = "";
     }
     
+    public void buscaPorBanda() {
+        musicas = musicaRepository.buscarPorNomeBanda(nomeBanda);
+        if (musicas.isEmpty()) {
+            mensagem = "Nenhuma música de uma banda que contenha " + nomeBanda + "!";
+        } else {
+            mensagem = "Mostrando as música de uma banda que contém: \"" + nomeBanda + "\".";
+        }
+        nomeBanda = "";
+    }
+    
     public String cadastrar() {
         Musica novaMusica = new Musica(nomeMusica, generoMusica, bandaMusica);
         
-        musicaRepository.salvar(novaMusica);
+        try {
+            musicaRepository.salvar(novaMusica);
         
-        mensagem = "Música cadastrada com sucesso";
-        
-        return "";
+            mensagem = "Música cadastrada com sucesso"; 
+        } catch(Exception ex) {
+            System.out.println("Erro ao cadastrar musica");
+            System.out.println(ex.getMessage());
+            
+            mensagem = "Não foi possível cadastrar a música";
+        } finally {
+            return "";
+        }
     }
 
     public void removerMusica(Musica musica) {
