@@ -6,6 +6,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import repository.MusicaRepository;
 
@@ -29,6 +30,7 @@ public class MusicasBean implements Serializable {
         musicas = musicaRepository.listar();
         if (musicas.isEmpty()) {
             mensagem = "Nenhuma música cadastrada!";
+            musicas = new ArrayList<>();
         }
     }
 
