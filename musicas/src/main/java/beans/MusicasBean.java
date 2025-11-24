@@ -10,6 +10,8 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import repository.BandaRepository;
+import repository.GeneroRepository;
 import repository.MusicaRepository;
 
 @Named
@@ -18,12 +20,18 @@ public class MusicasBean implements Serializable {
 
     @Inject
     private MusicaRepository musicaRepository;
+    
+    @Inject
+    private BandaRepository bandaRepository;
+    
+    @Inject
+    private GeneroRepository generoRepository;
 
     private List<Musica> musicas;
     
-    private Genero generoMusica;
+    private long generoId;
     
-    private Banda bandaMusica;
+    private long bandaId;
 
     private String nomeMusica;
     
@@ -73,7 +81,9 @@ public class MusicasBean implements Serializable {
     }
     
     public String cadastrar() {
-        Musica novaMusica = new Musica(nomeMusica, generoMusica, bandaMusica);
+        //Banda banda = bandaRepository.b
+        
+        Musica novaMusica = new Musica(nomeMusica, null, null);
         
         try {
             musicaRepository.salvar(novaMusica);
@@ -126,24 +136,16 @@ public class MusicasBean implements Serializable {
         this.nomeGenero = nomeGenero;
     }
 
+    public String getNomeBanda() {
+        return nomeBanda;
+    }
+
+    public void setNomeBanda(String nomeBanda) {
+        this.nomeBanda = nomeBanda;
+    }
+    
     public String getMensagem() {
         return mensagem;
-    }
-
-    public Genero getGeneroMusica() {
-        return generoMusica;
-    }
-
-    public void setGeneroMusica(Genero generoMusica) {
-        this.generoMusica = generoMusica;
-    }
-
-    public Banda getBandaMusica() {
-        return bandaMusica;
-    }
-
-    public void setBandaMusica(Banda bandaMusica) {
-        this.bandaMusica = bandaMusica;
     }
 
 }

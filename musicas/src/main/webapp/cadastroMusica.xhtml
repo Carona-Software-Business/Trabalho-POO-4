@@ -21,7 +21,7 @@
 
                 <h:outputLabel value="Gênero:" for="genero" />
                 <h:selectOneListbox id ="genero" label="genero"  value="#{musicasBean.generoMusica}">
-                    <f:selectItems value="#{cadastroMusicaBean.generos}"
+                    <f:selectItems value="#{generosBean.generos}"
                                    var="g"
                                    itemValue="#{g.id}"
                                    itemLabel="#{g.nome}" />
@@ -31,7 +31,7 @@
                 
                 <h:outputLabel value="Banda:" for="banda" />
                 <h:selectOneListbox id ="banda" label="banda"  value="#{musicasBean.bandaMusica}">
-                    <f:selectItems value="#{cadastroMusicaBean.generos}"
+                    <f:selectItems value="#{bandasBean.bandas}"
                                    var="b"
                                    itemValue="#{b.id}"
                                    itemLabel="#{b.nome}" />
