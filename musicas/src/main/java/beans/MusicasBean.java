@@ -1,5 +1,7 @@
 package beans;
 
+import entity.Banda;
+import entity.Genero;
 import entity.Musica;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
@@ -18,6 +20,10 @@ public class MusicasBean implements Serializable {
     private MusicaRepository musicaRepository;
 
     private List<Musica> musicas;
+    
+    private Genero generoMusica;
+    
+    private Banda bandaMusica;
 
     private String nomeMusica;
 
@@ -52,6 +58,10 @@ public class MusicasBean implements Serializable {
             mensagem = "Mostrando as música de gêneros que contém: \"" + nomeGenero + "\".";
         }
         nomeGenero = "";
+    }
+    
+    public String cadastrar() {
+        return "";
     }
 
     public void removerMusica(Musica musica) {
@@ -93,6 +103,22 @@ public class MusicasBean implements Serializable {
 
     public String getMensagem() {
         return mensagem;
+    }
+
+    public Genero getGeneroMusica() {
+        return generoMusica;
+    }
+
+    public void setGeneroMusica(Genero generoMusica) {
+        this.generoMusica = generoMusica;
+    }
+
+    public Banda getBandaMusica() {
+        return bandaMusica;
+    }
+
+    public void setBandaMusica(Banda bandaMusica) {
+        this.bandaMusica = bandaMusica;
     }
 
 }
