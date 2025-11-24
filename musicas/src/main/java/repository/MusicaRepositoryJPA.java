@@ -29,4 +29,10 @@ public class MusicaRepositoryJPA extends GenericRepositoryJPA<Musica> implements
                 .setParameter("genero", "%" + nomeGenero + "%").getResultList();
     }
 
+    @Override
+    public List<Musica> buscarPorNomeBanda(String nomeBanda) {
+        return em.createQuery("SELECT m FROM Musica m WHERE LOWER(m.banda.nome) LIKE LOWER(:banda)", Musica.class)
+                .setParameter("banda", "%" + nomeBanda + "%").getResultList();
+    }
+
 }

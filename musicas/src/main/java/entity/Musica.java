@@ -18,6 +18,9 @@ public class Musica {
 
     @ManyToOne
     private Genero genero;
+    
+    @ManyToOne
+    private Banda banda;
 
     public long getId() {
         return id;
@@ -43,4 +46,11 @@ public class Musica {
         this.genero = genero;
     }
 
+    public Banda getBanda() {
+        return banda;
+    }
+
+    public void setBanda(Banda banda) {
+        this.banda = banda;
+    }
 }

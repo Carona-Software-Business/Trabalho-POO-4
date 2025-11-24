@@ -3,6 +3,7 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="JSF2Unit" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/trabalho4</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
     </properties>

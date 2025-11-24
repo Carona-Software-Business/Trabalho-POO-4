@@ -10,5 +10,6 @@ public interface MusicaRepository extends GenericRepository<Musica> {
     public List<Musica> buscarPorNomeParcial(String nome);
 
     public List<Musica> buscarPorNomeGenero(String nomeGenero);
-
+    
+    public List<Musica> buscarPorNomeBanda(String nomeBanda);
 }
