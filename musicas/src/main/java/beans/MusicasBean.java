@@ -27,6 +27,9 @@ public class MusicasBean implements Serializable {
     @Inject
     private GeneroRepository generoRepository;
 
+    @Inject
+    private UsuarioBean usuarioBean;
+    
     private List<Musica> musicas;
     
     private long generoId;
@@ -111,7 +114,7 @@ public class MusicasBean implements Serializable {
     }
     
     public void favoritar(Musica musica) {
-        
+        usuarioBean.favoritar(musica);
     }
 
     public List<Musica> getMusicas() {

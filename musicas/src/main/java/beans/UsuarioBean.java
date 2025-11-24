@@ -9,6 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import repository.MusicaRepository;
 import repository.UsuarioRepository;
 
 @Named
@@ -20,6 +21,9 @@ public class UsuarioBean implements Serializable {
     @Inject
     private UsuarioRepository usuarioRepository;
     
+    @Inject
+    private MusicaRepository musicaRepository;
+
     private String nome;
     
     private String login;
@@ -161,5 +165,30 @@ public class UsuarioBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    
+    public void favoritar(Musica musica) {
+        if (usuarioLogado == null) {
+            mensagemErroLogin();
+            return;
+        }
+
+        Usuario usuarioBanco = usuarioRepository.buscar(usuarioLogado.getLogin(), usuarioLogado.getSenha());
+
+        // garante que a música está 'managed'
+        Musica musicaBanco = musicaRepository.buscarPorID(musica.getId());
+
+        if (usuarioBanco.getMusicasFavoritas().contains(musicaBanco)) {
+            usuarioBanco.getMusicasFavoritas().remove(musicaBanco);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Música removida dos favoritos!"));
+        } else {
+            usuarioBanco.getMusicasFavoritas().add(musicaBanco);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Música adicionada aos favoritos!"));
+        }
+
+        usuarioRepository.atualizar(usuarioBanco);
+        usuarioLogado = usuarioBanco;
+    }
+
+
 }

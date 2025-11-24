@@ -4,8 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +30,12 @@ public class Usuario {
     private boolean administrador;
     
     @ManyToMany
-    private List<Musica> musicasFavoritas;
+    @JoinTable(
+            name = "USUARIO_FAVORITOS",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "musica_id")
+    )
+    private List<Musica> musicasFavoritas = new ArrayList<>();
     
     public Usuario(){};
 

@@ -4,7 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Musica {
@@ -22,6 +25,9 @@ public class Musica {
     @ManyToOne
     private Banda banda;
 
+    @ManyToMany(mappedBy = "musicasFavoritas") 
+    private List<Usuario> usuarios = new ArrayList<>();
+    
     public Musica() {
     }
 
@@ -61,5 +67,22 @@ public class Musica {
 
     public void setBanda(Banda banda) {
         this.banda = banda;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Musica)) {
+            return false;
+        }
+        Musica m = (Musica) o;
+        return id != 0 && id == m.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
     }
 }

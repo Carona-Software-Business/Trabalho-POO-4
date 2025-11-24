@@ -7,7 +7,7 @@
                 xmlns:f="jakarta.faces.core">
     <ui:define name="titulo">Lista de Músicas</ui:define>
     <ui:define name="conteudo">
-        <h:form>
+        <h:form>    
             <h:panelGrid columns="3" cellpadding="5">
                 <h:outputLabel for="nome" value="Busca por nome:" />
                 <h:inputText id="nome" value="#{musicasBean.nomeMusica}"/>
@@ -16,18 +16,65 @@
                 <h:outputLabel for="genero" value="Busca por gênero:" />
                 <h:inputText id="genero" value="#{musicasBean.nomeGenero}"/>
                 <h:commandButton value="Buscar" action="#{musicasBean.buscaPorGenero()}"/>
-                
+
                 <h:outputLabel for="banda" value="Busca por banda:" />
                 <h:inputText id="banda" value="#{musicasBean.nomeBanda}"/>
                 <h:commandButton value="Buscar" action="#{musicasBean.buscaPorBanda()}"/>
             </h:panelGrid>
-            
+
             <h:outputText value ="#{musicasBean.mensagem}"/>
-            
+
+            <h:panelGroup rendered="#{usuarioBean.logado}">
+                <h2>Minhas músicas favoritas</h2>
+
+                <h:dataTable value="#{usuarioBean.usuarioLogado.musicasFavoritas}" var="m" border="1" styleClass="music-table">
+
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{m.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Nome</f:facet>
+                            #{m.nome}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Gênero</f:facet>
+                            #{m.genero.nome}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Banda</f:facet>
+                            #{m.banda.nome}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Ações</f:facet>
+
+                        <h:commandButton value="Desfavoritar" action="#{musicasBean.favoritar(m)}"/>
+
+                        <h:panelGroup rendered="#{usuarioBean.usuarioLogado.administrador}">
+                            <h:commandButton value="Editar" action="#{musicasBean.editarMusica(m)}"/>
+                            <h:commandButton value="Remover" action="#{musicasBean.removerMusica(m)}"/>
+                        </h:panelGroup>
+
+                    </h:column>
+
+                </h:dataTable>
+
+                <br/><br/>
+            </h:panelGroup>
+
+            <h2>Todas musícas</h2>
             <h:dataTable value="#{musicasBean.musicas}" var="m" border="1" styleClass="music-table">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                         #{m.id}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Favorita</f:facet>
+                    <h:outputText value="#{usuarioBean.usuarioLogado.musicasFavoritas.contains(m) ? 'Sim' : 'Não'}"/>
                 </h:column>
                 
                 <h:column>
