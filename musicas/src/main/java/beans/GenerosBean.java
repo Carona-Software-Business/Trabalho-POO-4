@@ -19,6 +19,8 @@ public class GenerosBean implements Serializable {
     private GeneroRepository generoRepository;
 
     private List<Genero> generos;
+    
+    private String nomeGenero;
 
     private String nomeBusca;
 
@@ -84,6 +86,23 @@ public class GenerosBean implements Serializable {
             mensagem = "Erro ao atualizar gênero!";
         }
     }
+    
+    public String cadastrar() {
+        Genero novoGenero = new Genero(nomeGenero);
+        
+        try {
+            generoRepository.salvar(novoGenero);
+            
+            mensagem = "Genero cadastrado com sucesso";
+        } catch(Exception ex) {
+            System.out.println("Erro ao cadastrar o genero");
+            System.out.println(ex.getMessage());
+            
+            mensagem = "Não foi possível cadastrar o gênero";
+        } finally {
+            return "";
+        }
+    }
 
     public List<Genero> getGeneros() {
         return generos;
@@ -118,6 +137,14 @@ public class GenerosBean implements Serializable {
         if (generos.isEmpty()) {
             mensagem = "Nenhum gênero encontrado!";
         }
+    }
+
+    public String getNomeGenero() {
+        return nomeGenero;
+    }
+
+    public void setNomeGenero(String nomeGenero) {
+        this.nomeGenero = nomeGenero;
     }
 
 }
