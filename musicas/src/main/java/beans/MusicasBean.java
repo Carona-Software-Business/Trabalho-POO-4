@@ -81,9 +81,11 @@ public class MusicasBean implements Serializable {
     }
     
     public String cadastrar() {
-        //Banda banda = bandaRepository.b
+        Banda banda = bandaRepository.buscarPorID(bandaId);
         
-        Musica novaMusica = new Musica(nomeMusica, null, null);
+        Genero genero = generoRepository.buscarPorID(generoId);
+        
+        Musica novaMusica = new Musica(nomeMusica, genero, banda);
         
         try {
             musicaRepository.salvar(novaMusica);
