@@ -150,4 +150,20 @@ public class MusicasBean implements Serializable {
         return mensagem;
     }
 
+    public long getGeneroId() {
+        return generoId;
+    }
+
+    public void setGeneroId(long generoId) {
+        this.generoId = generoId;
+    }
+
+    public long getBandaId() {
+        return bandaId;
+    }
+
+    public void setBandaId(long bandaId) {
+        this.bandaId = bandaId;
+    }
+
 }

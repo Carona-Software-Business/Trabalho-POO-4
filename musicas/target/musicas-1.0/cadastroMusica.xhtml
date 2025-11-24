@@ -20,7 +20,7 @@
                 <h:message for ="nome"/>
 
                 <h:outputLabel value="Gênero:" for="genero" />
-                <h:selectOneListbox id ="genero" label="genero"  value="#{musicasBean.generoMusica}">
+                <h:selectOneListbox id ="genero" label="genero"  value="#{musicasBean.generoId}">
                     <f:selectItems value="#{generosBean.generos}"
                                    var="g"
                                    itemValue="#{g.id}"
@@ -30,7 +30,7 @@
                 <h:message for ="genero"/>
                 
                 <h:outputLabel value="Banda:" for="banda" />
-                <h:selectOneListbox id ="banda" label="banda"  value="#{musicasBean.bandaMusica}">
+                <h:selectOneListbox id ="banda" label="banda"  value="#{musicasBean.bandaId}">
                     <f:selectItems value="#{bandasBean.bandas}"
                                    var="b"
                                    itemValue="#{b.id}"
