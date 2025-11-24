@@ -61,6 +61,12 @@ public class MusicasBean implements Serializable {
     }
     
     public String cadastrar() {
+        Musica novaMusica = new Musica(nomeMusica, generoMusica, bandaMusica);
+        
+        musicaRepository.salvar(novaMusica);
+        
+        mensagem = "Música cadastrada com sucesso";
+        
         return "";
     }
 
