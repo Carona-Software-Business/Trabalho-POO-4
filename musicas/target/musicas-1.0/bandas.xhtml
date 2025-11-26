@@ -9,11 +9,18 @@
     <ui:define name="conteudo">
         <h:form>
             <!-- Busca por nome -->
-            <h:panelGrid columns="3" cellpadding="5">
-                <h:outputLabel for="nome" value="Busca por nome:" />
-                <h:inputText id="nome" value="#{bandasBean.nomeBusca}"/>
-                <h:commandButton value="Buscar" action="#{bandasBean.buscarPorNomeParcial()}"/>
-            </h:panelGrid>
+            <h3>Buscar Bandas</h3>
+
+            <div style="background:white; padding:15px; border-radius:10px;
+            box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-bottom:20px;">
+
+                <h:panelGrid columns="3" cellpadding="8">
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="nome" value="#{bandasBean.nomeBusca}"/>
+                    <h:commandButton value="Buscar" action="#{bandasBean.buscarPorNomeParcial()}"/>
+                </h:panelGrid>
+            </div>
+
 
             <h:outputText value ="#{bandasBean.mensagem}"/>
 

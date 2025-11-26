@@ -8,31 +8,56 @@
     <ui:define name="titulo">Página inicial</ui:define>
 
     <ui:define name="conteudo">
-        <h2>Bem Vindo, #{usuarioBean.usuarioLogado.nome}</h2>
-        <p>Login: #{usuarioBean.usuarioLogado.login}</p>
-        <p>Veja suas <h:link value=" músicas favoritas" outcome="musicas"/></p>
-        
+        <h2>Olá, #{usuarioBean.usuarioLogado.nome} 👋</h2>
+
+        <div style="background:white; padding:20px; border-radius:10px;
+             margin-bottom:20px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+
+            <p><b>Login:</b> #{usuarioBean.usuarioLogado.login}</p>
+            <p>Veja suas <h:link value="músicas favoritas" outcome="musicas"/></p>
+        </div>
+
+
         <h3>Editar nome</h3>
-        <h:form>
-            <h:outputLabel value="Novo nome:" for="nome"/>
-            <h:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
+        <div style="background:white; padding:15px; border-radius:10px;
+             width:350px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="8">
+                    <h:outputLabel for="nome" value="Novo nome:"/>
+                    <h:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
+                </h:panelGrid>
+                <h:commandButton value="Atualizar"/>
+            </h:form>
+        </div>
 
-            <h:commandButton value="Atualizar" action="#{usuarioBean.atualizarNome()}"/>
-        </h:form>
-        
         <h3>Editar senha</h3>
-        <h:form>
-            <h:outputLabel value="Senha Atual:" for="senha"/>
-            <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true"/>
-            
-            <h:outputLabel value="Nova Senha:" for="novaSenha"/>
-            <h:inputSecret id="novaSenha" value="#{usuarioBean.novaSenha}" required="true"/>
 
-            <h:commandButton value="Atualizar" action="#{usuarioBean.atualizarSenha()}"/>
-            
-            <h:messages globalOnly="true" showDetail="false" style="color:red;" />
-            <h:messages globalOnly="true" showSummary="false" showDetail="true" style="color:red;" />
-        </h:form>
+        <div style="background:white; padding:20px; width:350px;
+             border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-top:15px;">
+
+            <h:form>
+
+                <h:panelGrid columns="2" cellpadding="8">
+
+                    <h:outputLabel for="senha" value="Senha atual:"/>
+                    <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true"/>
+
+                    <h:outputLabel for="novaSenha" value="Nova senha:"/>
+                    <h:inputSecret id="novaSenha" value="#{usuarioBean.novaSenha}" required="true"/>
+
+                </h:panelGrid>
+
+                <h:commandButton value="Atualizar" action="#{usuarioBean.atualizarSenha()}"/>
+
+                <!-- Mensagens de erro -->
+                <div style="margin-top:12px;">
+                    <h:messages globalOnly="true" showSummary="false" showDetail="true" style="color:red;" />
+                </div>
+
+            </h:form>
+
+        </div>
+
     </ui:define>
 
 </ui:composition>

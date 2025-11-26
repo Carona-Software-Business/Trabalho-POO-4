@@ -3,51 +3,82 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
-                template="template.xhtml"
-                xmlns:f="jakarta.faces.core">
+                xmlns:f="jakarta.faces.core"
+                template="template.xhtml">
+
     <ui:define name="titulo">Lista de Gêneros</ui:define>
+
     <ui:define name="conteudo">
+
         <h:form>
-            <!-- Busca por nome -->
-            <h:panelGrid columns="3" cellpadding="5">
-                <h:outputLabel for="nome" value="Busca por nome:" />
-                <h:inputText id="nome" value="#{generosBean.nomeBusca}"/>
-                <h:commandButton value="Buscar" action="#{generosBean.buscarPorNomeParcial()}"/>
-            </h:panelGrid>
 
-            <h:outputText value ="#{generosBean.mensagem}"/>
+            <!-- ====== CARD DE BUSCA ====== -->
+            <div style="background:white; padding:20px; width:450px;
+                 border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);
+                 margin-bottom:25px;">
 
-            <!-- Tabela de gêneros -->
-            <h:dataTable value="#{generosBean.generos}" var="g" border="1" styleClass="music-table">
+                <h3 style="margin-top:0;">Buscar gênero</h3>
+
+                <h:panelGrid columns="3" cellpadding="8"
+                             style="align-items:center;">
+
+                    <h:outputLabel for="nome" value="Nome:"/>
+                    <h:inputText id="nome" value="#{generosBean.nomeBusca}"
+                                 style="width:150px;" />
+                    <h:commandButton value="Buscar" action="#{generosBean.buscarPorNomeParcial()}"/>
+
+                </h:panelGrid>
+
+                <h:outputText value="#{generosBean.mensagem}"
+                              style="color:#444; margin-top:10px; display:block;" />
+            </div>
+
+            <!-- ====== TABELA LISTA DE GÊNEROS ====== -->
+            <h2>Gêneros cadastrados</h2>
+
+            <h:dataTable value="#{generosBean.generos}" var="g"
+                         border="0" styleClass="music-table">
+
                 <h:column>
                     <f:facet name="header">ID</f:facet>
-                    #{g.id}
+                        #{g.id}
                 </h:column>
+
                 <h:column>
                     <f:facet name="header">Nome</f:facet>
                     <h:outputLink value="musicasPorGenero.xhtml?nomeGenero=#{g.nome}" target="_blank">
                         #{g.nome}
                     </h:outputLink>
                 </h:column>
+
                 <h:column>
                     <f:facet name="header">Ações</f:facet>
-                    
-                    <!-- Apenas administradores podem editar/remover -->
-                    <h:panelGroup rendered="#{usuarioBean.usuarioLogado.administrador}">
-                        <h:commandButton value="Editar" action="#{generosBean.editarGenero(g)}"/>
-                        <!-- ATENÇÃO: precisa criar a página de edição de gênero -->
-                        
-                        <h:commandButton value="Remover" 
-                                         action="#{generosBean.removerGenero(g)}"/>
+
+                    <h:panelGroup rendered="#{usuarioBean.usuarioLogado.administrador}" layout="block">
+                        <h:commandButton value="Editar"
+                                         action="#{generosBean.editarGenero(g)}"
+                                         style="margin-right:6px;" />
+
+                        <h:commandButton value="Remover"
+                                         action="#{generosBean.removerGenero(g)}" />
                     </h:panelGroup>
+
                 </h:column>
+
             </h:dataTable>
 
-            <!-- Listar todos -->
-            <h:commandButton value="Listar todos" action="#{generosBean.listar()}"/>
+            <!-- ====== BOTÕES FINAIS ====== -->
+            <div style="margin-top:20px;">
+                <h:commandButton value="Listar todos"
+                                 action="#{generosBean.listar()}"
+                                 style="margin-right:10px;" />
 
-            <!-- Cadastro de novo gênero -->
-            <h:commandButton value="Cadastrar novo gênero" action="cadastroGenero.xhtml"/>
+                <h:commandButton value="Cadastrar novo gênero"
+                                 action="cadastroGenero.xhtml" />
+            </div>
+
         </h:form>
+
     </ui:define>
+
 </ui:composition>

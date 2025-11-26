@@ -8,90 +8,142 @@
         <title><ui:insert name="titulo">Sistema de Músicas</ui:insert></title>
 
         <style>
-            /* ============================
-               ESTILO GLOBAL
-            ============================ */
+            /* ====== ESTILO GERAL ====== */
 
             body {
+                font-family: "Segoe UI", Arial, sans-serif;
                 margin: 0;
                 padding: 0;
-                background: #eef2f3;
-                font-family: "Inter", "Segoe UI", Arial, sans-serif;
-                color: #2d2d2d;
+                background: #eef1f7;
             }
 
-            /* Cabeçalho */
+            /* ===== HEADER ===== */
+
             header {
-                background: #0d2538;
-                color: #ffffff;
-                padding: 25px 40px;
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                background: #182848;
+                background: linear-gradient(90deg, #182848 0%, #4b6cb7 100%);
+                color: white;
+                padding: 22px;
+                box-shadow: 0 3px 7px rgba(0,0,0,0.25);
             }
 
             header h1 {
-                font-size: 2.1em;
-                font-weight: 600;
                 margin: 0;
+                font-size: 2em;
+                font-weight: 600;
             }
 
             nav {
-                display: flex;
-                gap: 18px;
+                margin-top: 12px;
             }
 
             nav a {
+                color: #dfe7ff;
                 text-decoration: none;
-                padding: 8px 15px;
-                background: #1b4358;
-                color: #d8f3fb;
-                border-radius: 20px;
-                font-weight: 500;
-                transition: 0.3s;
+                margin-right: 20px;
+                font-weight: bold;
+                padding: 6px 10px;
+                font-size: 0.95em;
+                border-radius: 8px;
+                transition: 0.25s;
             }
 
             nav a:hover {
-                background: #2b6078;
-                color: white;
+                background: rgba(255,255,255,0.25);
             }
 
-            /* Área principal */
+            /* ===== MAIN ===== */
+
             main {
-                padding: 35px 50px;
-                min-height: 450px;
+                padding: 30px 40px;
+                min-height: 500px;
             }
 
-            /* Rodapé */
+            /* ===== FOOTER ===== */
+
             footer {
-                background: #dfe6e9;
-                color: #4a4a4a;
+                background-color: #dfe3ea;
                 text-align: center;
-                padding: 12px;
-                font-size: 0.9em;
-                margin-top: 40px;
-                border-top: 1px solid #c7d1d4;
+                padding: 14px;
+                font-size: 0.85em;
+                color: #444;
+                border-top: 1px solid #c2c6d0;
             }
 
-            /* ============================
-               TABELAS ESTILIZADAS
-            ============================ */
+            /* ===== TITULOS ===== */
 
-            table.music-table {
+            h2, h3 {
+                margin-top: 20px;
+                color: #2d2f3a;
+            }
+
+            /* ========================
+               FORMULÁRIOS / INPUTS
+               ======================== */
+
+            input[type="text"],
+            input[type="password"],
+            input[type="search"],
+            input[type="number"],
+            textarea {
+                width: 260px;
+                padding: 8px 10px;
+                border: 1px solid #bfc5d2;
+                border-radius: 6px;
+                margin-bottom: 8px;
+                font-size: 0.95em;
+                background: white;
+                transition: 0.2s;
+            }
+
+            input[type="text"]:focus,
+            input[type="password"]:focus {
+                border-color: #4b6cb7;
+                box-shadow: 0 0 3px #4b6cb7;
+            }
+
+            /* ====== BOTÕES ====== */
+
+            input[type="submit"],
+            button,
+            input[type="button"],
+            .h-btn {
+                padding: 8px 14px;
+                background: #4b6cb7;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 0.9em;
+                transition: background 0.2s, transform 0.1s;
+                margin: 5px;
+            }
+
+            input[type="submit"]:hover,
+            button:hover,
+            input[type="button"]:hover,
+            .h-btn:hover {
+                background: #3a5898;
+                transform: translateY(-2px);
+            }
+
+            /* ====== TABELAS ====== */
+
+            .music-table {
                 width: 100%;
                 border-collapse: collapse;
                 margin-top: 25px;
                 background: white;
-                border-radius: 12px;
+                border-radius: 10px;
                 overflow: hidden;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+                box-shadow: 0 3px 7px rgba(0,0,0,0.15);
             }
 
             .music-table th {
-                background: #0d2538;
-                color: #e1f5fe;
-                padding: 14px;
+                background: #4b6cb7;
+                color: white;
+                padding: 12px;
                 text-align: left;
                 font-size: 0.95em;
                 letter-spacing: 0.5px;
@@ -99,49 +151,31 @@
 
             .music-table td {
                 padding: 12px;
-                font-size: 0.95em;
-                border-bottom: 1px solid #f1f1f1;
+                border-bottom: 1px solid #efefef;
             }
 
             .music-table tr:nth-child(even) {
-                background: #f6fbfc;
+                background: #f5f7ff;
             }
 
             .music-table tr:hover {
-                background: #e3f6ff;
+                background: #e8edff;
             }
 
-            /* ============================
-               BOTÕES
-            ============================ */
+            /* LINKS PADRÃO */
 
-            input[type="submit"],
-            button,
-            input[type="button"] {
-                padding: 9px 18px;
-                background: #16a085;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                font-weight: 600;
-                letter-spacing: 0.3px;
-                transition: 0.25s;
-            }
-
-            input[type="submit"]:hover,
-            button:hover,
-            input[type="button"]:hover {
-                background: #13856e;
-            }
-
-            /* Mensagens */
-            .error {
-                color: #c0392b;
+            a {
+                color: #4b6cb7;
                 font-weight: bold;
-                margin-bottom: 10px;
+                text-decoration: none;
             }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
         </style>
+
     </h:head>
 
     <h:body>
