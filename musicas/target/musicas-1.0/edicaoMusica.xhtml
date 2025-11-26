@@ -3,38 +3,68 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
-                xmlns:f ="jakarta.faces.core"
+                xmlns:f="jakarta.faces.core"
                 template="template.xhtml">
+
     <ui:define name="titulo">Edição de Música</ui:define>
+
     <ui:define name="conteudo">
+
         <f:metadata>
             <f:viewParam name="id" value="#{edicaoMusicaBean.idMusica}" />
             <f:viewAction action="#{edicaoMusicaBean.carregarMusica()}" />
         </f:metadata>
-        <h:outputLabel value="Edição de Música"/>
-        <h:form>
-            <h:outputText value="ID da música: #{edicaoMusicaBean.musica.id}" />
-            <h:panelGrid columns="3" cellpadding="5">
-                <h:outputLabel value="Nome da música:" for="nome" />
-                <h:inputText id="nome" value="#{edicaoMusicaBean.musica.nome}">
-                    <f:validateLength maximum="100" />
-                    <f:validateRequired/>
-                </h:inputText>
-                <h:message for ="nome"/>
 
-                <h:outputLabel value="Gênero:" for="genero" />
-                <h:selectOneListbox id="genero"  value="#{edicaoMusicaBean.idGeneroSelecionado}">
+        <h:form>
+
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <h:outputLabel value="ID da música:" />
+                <h:outputText value="#{edicaoMusicaBean.musica.id}" />
+
+                <h:outputLabel for="nome" value="Nome da música:" />
+                <h:inputText id="nome"
+                             value="#{edicaoMusicaBean.musica.nome}">
+                    <f:validateLength maximum="100" />
+                    <f:validateRequired />
+                </h:inputText>
+                <h:message for="nome" style="color:red;" />
+
+                <h:outputLabel for="genero" value="Gênero:" />
+                <h:selectOneListbox id="genero"
+                                    value="#{edicaoMusicaBean.idGeneroSelecionado}">
                     <f:selectItems value="#{edicaoMusicaBean.generos}"
                                    var="g"
                                    itemValue="#{g.id}"
                                    itemLabel="#{g.nome}" />
-                    <f:validateRequired/>
+                    <f:validateRequired />
                 </h:selectOneListbox>
-                <h:message for ="genero"/>
-            </h:panelGrid>
-            <h:commandButton value="Editar" action="#{edicaoMusicaBean.editarMusica()}" />
-        </h:form>
-        <h:outputLabel value="#{edicaoMusicaBean.mensagem}"/>
-    </ui:define>
-</ui:composition>
+                <h:message for="genero" style="color:red;" />
+                
+                <h:outputLabel for="banda" value="Banda:" />
+                <h:selectOneListbox id="banda"
+                                    value="#{edicaoMusicaBean.idGeneroSelecionado}">
+                    <f:selectItems value="#{edicaoMusicaBean.generos}"
+                                   var="g"
+                                   itemValue="#{g.id}"
+                                   itemLabel="#{g.nome}" />
+                    <f:validateRequired />
+                </h:selectOneListbox>
+                <h:message for="genero" style="color:red;" />
 
+            </h:panelGrid>
+
+            <br/>
+
+            <h:commandButton value="Salvar alterações"
+                             action="#{edicaoMusicaBean.editarMusica()}" />
+
+        </h:form>
+
+        <br/>
+
+        <h:outputText value="#{edicaoMusicaBean.mensagem}" style="color:blue;" />
+
+    </ui:define>
+
+</ui:composition>

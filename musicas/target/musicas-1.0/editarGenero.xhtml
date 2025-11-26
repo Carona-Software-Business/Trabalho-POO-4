@@ -4,20 +4,31 @@
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
                 template="template.xhtml">
+
     <ui:define name="titulo">Editar Gênero</ui:define>
+
     <ui:define name="conteudo">
         <h:form>
+
             <h:panelGrid columns="2" cellpadding="5">
-                <h:outputLabel for="nome" value="Novo nome:"/>
-                <h:inputText id="nome" value="#{generosBean.generoSelecionado.nome}" required="true"/>
+                <h:outputLabel for="nome" value="Novo nome:" />
+                <h:inputText id="nome"
+                             value="#{generosBean.generoSelecionado.nome}"
+                             required="true" />
             </h:panelGrid>
 
-            <h:commandButton value="Salvar" action="#{generosBean.salvarEdicao()}"/>
-            <h:outputLink value="generos.xhtml">
+            <br/>
+
+            <h:commandButton value="Salvar" action="#{generosBean.salvarEdicao()}" />
+            <h:outputLink value="generos.xhtml" style="margin-left: 20px;">
                 Voltar para lista
             </h:outputLink>
-            
-            <h:outputText value="#{generosBean.mensagem}" style="color:blue"/>
+
+            <br/><br/>
+
+            <h:outputText value="#{generosBean.mensagem}" style="color:blue;" />
+
         </h:form>
     </ui:define>
+
 </ui:composition>
