@@ -3,27 +3,79 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
-                template="template.xhtml"
-                xmlns:f="jakarta.faces.core">
-    <ui:define name="titulo">Músicas por Gênero</ui:define>
-    <ui:define name="conteudo">
-        <h:form>
-            <h:outputText value="#{musicasPorGeneroBean.mensagem}" style="font-weight:bold"/>
+                xmlns:f="jakarta.faces.core"
+                template="template.xhtml">
 
-            <h:dataTable value="#{musicasPorGeneroBean.musicas}" var="m" border="1" styleClass="music-table">
+    <ui:define name="titulo">Músicas por Gênero</ui:define>
+
+    <ui:define name="conteudo">
+
+        <h2>Músicas por Gênero</h2>
+
+        <h:form>
+
+            <h:outputText value="#{musicasPorGeneroBean.mensagem}" style="font-weight:bold; color:#333;" />
+
+            <!-- Tabela -->
+            <h:dataTable value="#{musicasPorGeneroBean.musicas}" 
+                         var="m" 
+                         styleClass="styled-table">
+
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     #{m.id}
                 </h:column>
+
                 <h:column>
                     <f:facet name="header">Nome</f:facet>
                     #{m.nome}
                 </h:column>
+
             </h:dataTable>
 
-            <h:outputLink value="generos.xhtml">
-                Voltar para gêneros
-            </h:outputLink>
+            <!-- Link de voltar -->
+            <div style="margin-top:20px;">
+                <h:outputLink value="generos.xhtml" styleClass="link-voltar">
+                    Voltar para gêneros
+                </h:outputLink>
+            </div>
+
         </h:form>
+
+        <!-- Estilos -->
+        <style>
+            .styled-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                background: white;
+                font-size: 16px;
+            }
+
+            .styled-table th {
+                background-color: #315efb;
+                color: white;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .styled-table td {
+                padding: 10px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .styled-table tr:nth-child(even) {
+                background-color: #f3f4ff;
+            }
+
+            .link-voltar {
+                font-size: 16px;
+                font-weight: bold;
+                color: #315efb;
+                text-decoration: none;
+            }
+        </style>
+
     </ui:define>
+
 </ui:composition>
