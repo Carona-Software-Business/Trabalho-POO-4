@@ -14,7 +14,7 @@
              margin-bottom:20px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
 
             <p><b>Login:</b> #{usuarioBean.usuarioLogado.login}</p>
-            <p>Veja suas <h:link value="músicas favoritas" outcome="musicas"/></p>
+            <p>Veja suas <h:link value=" músicas favoritas" outcome="musicas"/></p>
         </div>
 
 
@@ -26,7 +26,7 @@
                     <h:outputLabel for="nome" value="Novo nome:"/>
                     <h:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
                 </h:panelGrid>
-                <h:commandButton value="Atualizar"/>
+                <h:commandButton value="Atualizar" action="#{usuarioBean.atualizarNome()}"/>
             </h:form>
         </div>
 

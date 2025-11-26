@@ -19,7 +19,7 @@
                 <h:outputLabel for="nome" value="Nome do gênero:" />
                 <h:inputText id="nome"
                              label="nome"
-                             value="#{cadastroGeneroBean.genero.nome}">
+                             value="#{generosBean.nomeGenero}">
                     <f:validateLength maximum="100" />
                     <f:validateRequired />
                 </h:inputText>
@@ -30,7 +30,7 @@
             <br/>
 
             <h:commandButton value="Cadastrar"
-                             action="#{cadastroGeneroBean.cadastrarGenero()}" />
+                             action="#{generosBean.cadastrar()}" />
 
             <h:outputLink value="generos.xhtml" style="margin-left:20px;">
                 Voltar para lista
@@ -38,7 +38,7 @@
 
             <br/><br/>
 
-            <h:outputText value="#{cadastroGeneroBean.mensagem}" style="color:blue;" />
+            <h:outputText value="#{generosBean.mensagem}" style="color:blue;" />
 
         </h:form>
 

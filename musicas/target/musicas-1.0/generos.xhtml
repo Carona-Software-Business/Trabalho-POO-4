@@ -12,12 +12,11 @@
 
         <h:form>
 
+            <h2 style="margin-top:0;">Buscar gênero</h2>
             <!-- ====== CARD DE BUSCA ====== -->
             <div style="background:white; padding:20px; width:450px;
                  border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);
                  margin-bottom:25px;">
-
-                <h3 style="margin-top:0;">Buscar gênero</h3>
 
                 <h:panelGrid columns="3" cellpadding="8"
                              style="align-items:center;">
@@ -29,9 +28,10 @@
 
                 </h:panelGrid>
 
-                <h:outputText value="#{generosBean.mensagem}"
-                              style="color:#444; margin-top:10px; display:block;" />
             </div>
+            
+            <h:outputText value="#{generosBean.mensagem}"
+                              style="color:#444; margin-top:10px; display:block;" />
 
             <!-- ====== TABELA LISTA DE GÊNEROS ====== -->
             <h2>Gêneros cadastrados</h2>

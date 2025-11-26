@@ -61,14 +61,17 @@ public class BandasBean implements Serializable {
     }
 
     public void removerBanda(Banda banda) {
-        if (!usuarioBean.getUsuarioLogado().isAdministrador()) {
-            mensagem = "Apenas administradores podem remover bandas.";
-            return;
+        try {
+            bandaRepository.remover(banda);
+            listar();
+            mensagem = "Banda removida com sucesso!";
+        } catch (Exception ex) {
+            System.out.println("Erro ao remover a banda");
+            System.out.println(ex.getMessage());
+            mensagem = "Não foi possível remover a banda!\n"
+                    + "Há músicas cadastradas à ela.";
         }
-        // Se futuramente houver relação Banda -> Musicas, pode validar aqui
-        bandaRepository.remover(banda);
-        listar();
-        mensagem = "Banda removida com sucesso!";
+        
     }
 
     public String editarBanda(Banda banda) {

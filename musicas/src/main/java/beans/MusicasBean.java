@@ -4,6 +4,7 @@ import entity.Banda;
 import entity.Genero;
 import entity.Musica;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -43,6 +44,10 @@ public class MusicasBean implements Serializable {
     private String nomeGenero;
 
     private String mensagem;
+    
+    private Musica musicaSelecionada;
+    
+    private long id;
 
     @PostConstruct
     public void listar() {
@@ -50,6 +55,20 @@ public class MusicasBean implements Serializable {
         if (musicas.isEmpty()) {
             mensagem = "Nenhuma música cadastrada!";
             musicas = new ArrayList<>();
+        }
+        
+        String idParam = FacesContext.getCurrentInstance()
+            .getExternalContext()
+            .getRequestParameterMap()
+            .get("idMusica");
+
+        if (idParam != null) {
+            try {
+                id = Long.parseLong(idParam);
+                musicaSelecionada = musicaRepository.buscarPorID(id);
+            } catch (NumberFormatException e) {
+                mensagem = "ID inválido para edição.";
+            }
         }
     }
 
@@ -99,6 +118,29 @@ public class MusicasBean implements Serializable {
             System.out.println(ex.getMessage());
             
             mensagem = "Não foi possível cadastrar a música";
+        } finally {
+            return "";
+        }
+    }
+    
+    public String salvarEdicao() {
+        Banda novaBanda = bandaRepository.buscarPorID(bandaId);
+        
+        Genero novoGenero = generoRepository.buscarPorID(generoId);
+        
+        musicaSelecionada.setNome(nomeBanda);
+        musicaSelecionada.setBanda(novaBanda);
+        musicaSelecionada.setGenero(novoGenero);
+        
+        try {
+            musicaRepository.salvar(musicaSelecionada);
+            
+            mensagem = "Música editada com sucesso!";
+            
+        } catch (Exception ex) {
+            System.out.println("Erro ao editar musica");
+            System.out.println(ex.getMessage());
+            mensagem = "Não foi possível cadastrar a música!";
         } finally {
             return "";
         }
@@ -167,6 +209,18 @@ public class MusicasBean implements Serializable {
 
     public void setBandaId(long bandaId) {
         this.bandaId = bandaId;
+    }
+
+    public Musica getMusicaSelecionada() {
+        return musicaSelecionada;
+    }
+
+    public void setMusicaSelecionada(Musica musicaSelecionada) {
+        this.musicaSelecionada = musicaSelecionada;
+    }
+
+    public long getId() {
+        return id;
     }
 
 }

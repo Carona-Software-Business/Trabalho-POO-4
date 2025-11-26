@@ -60,17 +60,17 @@ public class GenerosBean implements Serializable {
     }
 
     public void removerGenero(Genero genero) {
-        if (!usuarioBean.getUsuarioLogado().isAdministrador()) {
-            mensagem = "Apenas administradores podem remover gêneros.";
-            return;
-        }
-        if (genero.getMusicas() != null && !genero.getMusicas().isEmpty()) {
+        
+        try {
+            generoRepository.remover(genero);
+            listar();
+            mensagem = "Gênero removido com sucesso!";
+        } catch(Exception ex) {
+            System.out.println("Erro ao remover o gênero");
+            System.out.println(ex.getMessage());
             mensagem = "Não é possível remover: existem músicas cadastradas nesse gênero.";
-            return;
         }
-        generoRepository.remover(genero);
-        listar();
-        mensagem = "Gênero removido com sucesso!";
+        
     }
     
     public String editarGenero(Genero genero) {
