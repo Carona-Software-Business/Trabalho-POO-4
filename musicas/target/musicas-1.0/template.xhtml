@@ -8,132 +8,153 @@
         <title><ui:insert name="titulo">Sistema de Músicas</ui:insert></title>
 
         <style>
-            /* ====== ESTILO GERAL ====== */
+            /* ============================
+               ESTILO GLOBAL
+            ============================ */
 
             body {
-                font-family: "Segoe UI", Arial, sans-serif;
                 margin: 0;
                 padding: 0;
-                background: #f7f8fa;
+                background: #eef2f3;
+                font-family: "Inter", "Segoe UI", Arial, sans-serif;
+                color: #2d2d2d;
             }
 
+            /* Cabeçalho */
             header {
-                background: linear-gradient(90deg, #1f3b73, #6b11c9);
-                color: white;
-                padding: 20px;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+                background: #0d2538;
+                color: #ffffff;
+                padding: 25px 40px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.2);
             }
 
             header h1 {
+                font-size: 2.1em;
+                font-weight: 600;
                 margin: 0;
-                font-size: 1.9em;
-                letter-spacing: 0.5px;
             }
 
             nav {
-                margin-top: 10px;
+                display: flex;
+                gap: 18px;
             }
 
             nav a {
-                color: #e2e6ff;
                 text-decoration: none;
-                margin-right: 25px;
-                font-weight: bold;
-                padding: 5px 8px;
-                border-radius: 6px;
-                transition: background 0.2s;
+                padding: 8px 15px;
+                background: #1b4358;
+                color: #d8f3fb;
+                border-radius: 20px;
+                font-weight: 500;
+                transition: 0.3s;
             }
 
             nav a:hover {
-                background: rgba(255,255,255,0.2);
+                background: #2b6078;
+                color: white;
             }
 
+            /* Área principal */
             main {
-                padding: 20px 30px;
+                padding: 35px 50px;
                 min-height: 450px;
             }
 
+            /* Rodapé */
             footer {
-                background-color: #ececec;
+                background: #dfe6e9;
+                color: #4a4a4a;
                 text-align: center;
                 padding: 12px;
-                font-size: 0.85em;
-                color: #555;
-                border-top: 1px solid #d5d5d5;
+                font-size: 0.9em;
+                margin-top: 40px;
+                border-top: 1px solid #c7d1d4;
             }
 
-
-            /* ====================================================
-               ESTILO PARA tabelas JSF
-               ==================================================== */
+            /* ============================
+               TABELAS ESTILIZADAS
+            ============================ */
 
             table.music-table {
                 width: 100%;
                 border-collapse: collapse;
-                margin-top: 20px;
+                margin-top: 25px;
                 background: white;
-                border-radius: 8px;
+                border-radius: 12px;
                 overflow: hidden;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.12);
             }
 
             .music-table th {
-                background: #6b11c9;
-                color: white;
-                padding: 10px;
+                background: #0d2538;
+                color: #e1f5fe;
+                padding: 14px;
                 text-align: left;
                 font-size: 0.95em;
                 letter-spacing: 0.5px;
             }
 
             .music-table td {
-                padding: 10px;
-                border-bottom: 1px solid #eee;
-                font-size: 0.92em;
+                padding: 12px;
+                font-size: 0.95em;
+                border-bottom: 1px solid #f1f1f1;
             }
 
             .music-table tr:nth-child(even) {
-                background: #f5f0ff;
+                background: #f6fbfc;
             }
 
             .music-table tr:hover {
-                background: #e9dfff;
+                background: #e3f6ff;
             }
 
-
-            /* ========= BOTÕES PADRÃO ========= */
+            /* ============================
+               BOTÕES
+            ============================ */
 
             input[type="submit"],
             button,
             input[type="button"] {
-                padding: 7px 14px;
-                background: #6b11c9;
+                padding: 9px 18px;
+                background: #16a085;
                 color: white;
                 border: none;
-                border-radius: 6px;
+                border-radius: 8px;
                 cursor: pointer;
-                font-weight: bold;
-                transition: 0.2s;
-                margin-right: 10px;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                transition: 0.25s;
             }
 
             input[type="submit"]:hover,
             button:hover,
             input[type="button"]:hover {
-                background: #5412a8;
+                background: #13856e;
             }
 
+            /* Mensagens */
+            .error {
+                color: #c0392b;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
         </style>
     </h:head>
 
     <h:body>
-        
+
+        <!-- Caso não esteja logado -->
         <h:panelGroup rendered="#{not usuarioBean.logado}">
-            <h:messages/>
-            <h:outputText value="Erro: você precisa fazer login para acessar esta página."/>
+            <h:messages styleClass="error"/>
+            <h:outputText value="Você precisa fazer login para acessar esta página."/>
+            <br/><br/>
             <h:link value="Ir para login" outcome="login"/>
         </h:panelGroup>
-        
+
+        <!-- Caso esteja logado -->
         <h:panelGroup rendered="#{usuarioBean.logado}">
             <header>
                 <h1>Sistema de Músicas</h1>
@@ -152,9 +173,9 @@
             </main>
 
             <footer>
-                Sistema de músicas — 2025
+                Sistema de Músicas — 2025
             </footer>
-        </h:panelGroup> 
-    </h:body>
+        </h:panelGroup>
 
+    </h:body>
 </html>
