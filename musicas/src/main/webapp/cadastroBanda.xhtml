@@ -4,22 +4,36 @@
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
                 template="template.xhtml">
+
     <ui:define name="titulo">Cadastro de Banda</ui:define>
+
     <ui:define name="conteudo">
+
         <h2>Cadastro de Banda</h2>
-        
+
         <h:form>
+
             <h:panelGrid columns="2" cellpadding="5">
-                <h:outputLabel for="nome" value="Nome da Banda:"/>
-                <h:inputText id="nome" value="#{bandasBean.nomeBanda}" required="true"/>
+                <h:outputLabel for="nome" value="Nome da Banda:" />
+                <h:inputText id="nome"
+                             value="#{bandasBean.nomeBanda}"
+                             required="true" />
             </h:panelGrid>
 
-            <h:commandButton value="Salvar" action="#{bandasBean.cadastrar()}"/>
-            <h:outputLink value="bandas.xhtml">
+            <br/>
+
+            <h:commandButton value="Salvar" action="#{bandasBean.cadastrar()}" />
+
+            <h:outputLink value="bandas.xhtml" style="margin-left: 20px;">
                 Voltar para lista
             </h:outputLink>
 
-            <h:outputText value="#{bandasBean.mensagem}" style="color:blue"/>
+            <br/><br/>
+
+            <h:outputText value="#{bandasBean.mensagem}" style="color:blue;" />
+
         </h:form>
+
     </ui:define>
+
 </ui:composition>

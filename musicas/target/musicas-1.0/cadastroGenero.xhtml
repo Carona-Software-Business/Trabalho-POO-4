@@ -3,26 +3,45 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
-                xmlns:f ="jakarta.faces.core"
+                xmlns:f="jakarta.faces.core"
                 template="template.xhtml">
-    <ui:define name="titulo">Cadastro de Gêneros</ui:define>
+
+    <ui:define name="titulo">Cadastro de Gênero</ui:define>
+
     <ui:define name="conteudo">
-        
-        <h2>Cadastro de gênero</h2>
-        
+
+        <h2>Cadastro de Gênero</h2>
+
         <h:form>
-            <h:panelGrid columns="3" cellpadding="5">
 
-                <h:outputLabel value="Nome do gênero:" for="nome" />
-                <h:inputText id="nome" label="nome" value="#{cadastroGeneroBean.genero.nome}">
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <h:outputLabel for="nome" value="Nome do gênero:" />
+                <h:inputText id="nome"
+                             label="nome"
+                             value="#{cadastroGeneroBean.genero.nome}">
                     <f:validateLength maximum="100" />
-                    <f:validateRequired/>
+                    <f:validateRequired />
                 </h:inputText>
-                <h:message for ="nome" showDetail="true" showSummary="false"/>
-            </h:panelGrid>
-            <h:commandButton value="Cadastrar" action="#{cadastroGeneroBean.cadastrarGenero()}" />
-        </h:form>
-        <h:outputLabel value="#{cadastroGeneroBean.mensagem}"/>
-    </ui:define>
-</ui:composition>
+                <h:message for="nome" style="color:red;" />
 
+            </h:panelGrid>
+
+            <br/>
+
+            <h:commandButton value="Cadastrar"
+                             action="#{cadastroGeneroBean.cadastrarGenero()}" />
+
+            <h:outputLink value="generos.xhtml" style="margin-left:20px;">
+                Voltar para lista
+            </h:outputLink>
+
+            <br/><br/>
+
+            <h:outputText value="#{cadastroGeneroBean.mensagem}" style="color:blue;" />
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

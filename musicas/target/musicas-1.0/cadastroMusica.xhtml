@@ -3,47 +3,119 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
-                xmlns:f ="jakarta.faces.core"
+                xmlns:f="jakarta.faces.core"
                 template="template.xhtml">
+
     <ui:define name="titulo">Cadastro de Música</ui:define>
+
     <ui:define name="conteudo">
-        <h1>Cadastro de Música</h1>
-        
-        <h:form>
-            <h:panelGrid columns="3" cellpadding="5">
 
-                <h:outputLabel value="Nome da música:" for="nome" />
-                <h:inputText id="nome" label="nome" value="#{musicasBean.nomeMusica}">
+        <h2>Cadastro de Música</h2>
+
+        <h:form styleClass="form-container">
+
+            <!-- Nome -->
+            <div class="form-row">
+                <label for="nome">Nome da música:</label>
+                <h:inputText id="nome" value="#{musicasBean.nomeMusica}" 
+                             styleClass="input-text">
                     <f:validateLength maximum="100" />
-                    <f:validateRequired/>
+                    <f:validateRequired />
                 </h:inputText>
-                <h:message for ="nome"/>
+            </div>
+            <h:message for="nome" style="color:red;" />
 
-                <h:outputLabel value="Gênero:" for="genero" />
-                <h:selectOneListbox id="genero" label="genero"  value="#{musicasBean.generoId}">
+            <!-- Gênero -->
+            <div class="form-row">
+                <label for="genero">Gênero:</label>
+                <h:selectOneListbox id="genero" value="#{musicasBean.generoId}" 
+                                    styleClass="input-select">
                     <f:selectItems value="#{generosBean.generos}"
-                                   var="g"
-                                   itemValue="#{g.id}"
-                                   itemLabel="#{g.nome}" />
-                    <f:validateRequired/>
+                                   var="g" itemValue="#{g.id}" itemLabel="#{g.nome}" />
+                    <f:validateRequired />
                 </h:selectOneListbox>
-                <h:message for ="genero"/>
-                
-                <h:outputLabel value="Banda:" for="banda" />
-                <h:selectOneListbox id ="banda" label="banda"  value="#{musicasBean.bandaId}">
-                    <f:selectItems value="#{bandasBean.bandas}"
-                                   var="b"
-                                   itemValue="#{b.id}"
-                                   itemLabel="#{b.nome}" />
-                    <f:validateRequired/>
-                </h:selectOneListbox>
-                <h:message for ="banda"/>
-            </h:panelGrid>
-            
-            <h:commandButton value="Cadastrar" action="#{musicasBean.cadastrar()}" />
-        </h:form>
-        
-        <h:outputLabel value="#{musicasBean.mensagem}"/>
-    </ui:define>
-</ui:composition>
+            </div>
+            <h:message for="genero" style="color:red;" />
 
+            <!-- Banda -->
+            <div class="form-row">
+                <label for="banda">Banda:</label>
+                <h:selectOneListbox id="banda" value="#{musicasBean.bandaId}" 
+                                    styleClass="input-select">
+                    <f:selectItems value="#{bandasBean.bandas}"
+                                   var="b" itemValue="#{b.id}" itemLabel="#{b.nome}" />
+                    <f:validateRequired />
+                </h:selectOneListbox>
+            </div>
+            <h:message for="banda" style="color:red;" />
+
+            <!-- Ações -->
+            <div class="form-actions">
+                <h:commandButton value="Cadastrar" action="#{musicasBean.cadastrar()}"
+                                 styleClass="btn" />
+                <h:outputLink value="musicas.xhtml" styleClass="link-voltar">
+                    Voltar para lista
+                </h:outputLink>
+            </div>
+
+            <h:outputText value="#{musicasBean.mensagem}" style="color:blue;" />
+
+        </h:form>
+
+        <!-- Estilo específico para formulários -->
+        <style>
+            .form-container {
+                width: 100%;
+                max-width: 600px;
+                margin-top: 25px;
+            }
+
+            .form-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+
+            .form-row label {
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            .input-text {
+                width: 300px;
+                padding: 6px 8px;
+                font-size: 15px;
+            }
+
+            .input-select {
+                width: 180px;
+            }
+
+            .form-actions {
+                margin-top: 25px;
+            }
+
+            .btn {
+                background-color: #315efb;
+                padding: 8px 18px;
+                color: white;
+                border-radius: 6px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+                margin-right: 20px;
+            }
+
+            .link-voltar {
+                font-size: 16px;
+                font-weight: bold;
+                color: #315efb;
+                text-decoration: none;
+            }
+        </style>
+
+
+    </ui:define>
+
+</ui:composition>
