@@ -1,134 +1,145 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html">
+
     <h:head>
         <title>Cadastro</title>
-        
+
         <style>
-    /* ====== ESTILO GERAL ====== */
+            body {
+                font-family: "Segoe UI", Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background: linear-gradient(135deg, #1f3b73, #6b11c9);
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-    body {
-        font-family: "Segoe UI", Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #f7f8fa;
-    }
+            .form-container {
+                width: 420px;
+                background: white;
+                padding: 32px;
+                border-radius: 14px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+                animation: fadeIn 0.4s ease;
+            }
 
-    /* ==== Container centralizado ==== */
-    .form-container {
-        width: 400px;
-        margin: 60px auto;
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px);
+                }
+                to   {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
 
-    h1 {
-        text-align: center;
-        color: #1f3b73;
-        margin-top: 0;
-        margin-bottom: 20px;
-        letter-spacing: 0.5px;
-    }
+            h1 {
+                text-align: center;
+                color: #1f3b73;
+                margin-top: 0;
+                margin-bottom: 18px;
+                font-size: 1.8em;
+            }
 
-    p {
-        text-align: center;
-        margin-bottom: 25px;
-    }
+            p {
+                text-align: center;
+                margin-bottom: 22px;
+                color: #444;
+            }
 
-    p a {
-        color: #6b11c9;
-        font-weight: bold;
-        text-decoration: none;
-    }
+            p a {
+                color: #6b11c9;
+                font-weight: bold;
+                text-decoration: none;
+            }
 
-    p a:hover {
-        text-decoration: underline;
-    }
+            p a:hover {
+                text-decoration: underline;
+            }
 
-    /* ====== Inputs ====== */
-    h\\:outputLabel {
-        display: block;
-        margin-top: 12px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 4px;
-    }
+            h\\:outputLabel {
+                display: block;
+                font-weight: 600;
+                color: #333;
+                margin-top: 14px;
+                margin-bottom: 4px;
+            }
 
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 8px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        font-size: 1em;
-    }
+            input[type=text],
+            input[type=password] {
+                width: 100%;
+                padding: 9px;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                font-size: 1em;
+                transition: all .2s;
+            }
 
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-        border-color: #6b11c9;
-        outline: none;
-        box-shadow: 0 0 3px rgba(107,17,201,0.4);
-    }
+            input[type=text]:focus,
+            input[type=password]:focus {
+                border-color: #6b11c9;
+                box-shadow: 0 0 4px rgba(107,17,201,0.4);
+                outline: none;
+            }
 
-    /* ====== BOTÃO ====== */
-    input[type="submit"],
-    button,
-    input[type="button"] {
-        width: 100%;
-        padding: 10px;
-        background: #6b11c9;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-        margin-top: 18px;
-        font-size: 1em;
-        transition: 0.2s;
-    }
+            .btn {
+                width: 100%;
+                padding: 12px;
+                background: #6b11c9;
+                color: white;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1.05em;
+                margin-top: 25px;
+                transition: 0.2s;
+            }
 
-    input[type="submit"]:hover,
-    button:hover,
-    input[type="button"]:hover {
-        background: #5412a8;
-    }
+            .btn:hover {
+                background: #5412a8;
+            }
 
-    /* ====== Mensagens de erro ====== */
-    .error-messages {
-        margin-top: 15px;
-        padding: 10px;
-        background: #ffe5e5;
-        border-left: 4px solid #cc0000;
-        color: #b30000;
-        border-radius: 6px;
-        font-size: 0.9em;
-    }
-</style>
+            .messages {
+                margin-top: 15px;
+                padding: 10px;
+                background: #ffe5e5;
+                border-left: 4px solid #cc0000;
+                color: #b30000;
+                border-radius: 6px;
+                font-size: 0.9em;
+            }
+        </style>
 
     </h:head>
-    <h:body class="form-container">
-        <h1>Cadastro</h1>
-        
-        <p>Já tem um cadastro? Então faça <h:link value=" login" outcome="login"/></p>
-        
-        <h:form>
-            <h:outputLabel value="Nome: " for="nome"/>
-            <h:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
-            
-            <h:outputLabel value="Login:" for="login"/>
-            <h:inputText id="login" value="#{usuarioBean.login}" required="true"/>
 
-            <h:outputLabel value="Senha:" for="senha"/>
-            <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true"/>
+    <h:body>
+        <div class="form-container">
 
-            <h:commandButton value="Cadastrar" action="#{usuarioBean.cadastrar()}"/>
-            
-            <h:messages globalOnly="true" showDetail="false" style="color:red;" />
-            <h:messages globalOnly="true" showSummary="false" showDetail="true" style="color:red;" />
-        </h:form>   
+            <h1>Cadastro</h1>
+            <p>Já tem um login? Acesse <h:link value=" aqui" outcome="login"/></p>
+
+            <h:form>
+                <h:outputLabel value="Nome:" for="nome"/>
+                <h:inputText id="nome" value="#{usuarioBean.nome}" required="true"/>
+
+                <h:outputLabel value="Login:" for="login"/>
+                <h:inputText id="login" value="#{usuarioBean.login}" required="true"/>
+
+                <h:outputLabel value="Senha:" for="senha"/>
+                <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true"/>
+
+                <h:commandButton value="Cadastrar" action="#{usuarioBean.cadastrar()}" styleClass="btn"/>
+
+                <h:messages globalOnly="true" styleClass="messages" />
+            </h:form>
+
+        </div>
     </h:body>
+
 </html>
