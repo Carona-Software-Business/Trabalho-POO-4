@@ -60,7 +60,7 @@ public class MusicasBean implements Serializable {
         String idParam = FacesContext.getCurrentInstance()
             .getExternalContext()
             .getRequestParameterMap()
-            .get("idMusica");
+            .get("id");
 
         if (idParam != null) {
             try {
@@ -69,6 +69,8 @@ public class MusicasBean implements Serializable {
             } catch (NumberFormatException e) {
                 mensagem = "ID inválido para edição.";
             }
+        } else {
+            System.out.println("A musica é null");
         }
     }
 
@@ -128,7 +130,7 @@ public class MusicasBean implements Serializable {
         
         Genero novoGenero = generoRepository.buscarPorID(generoId);
         
-        musicaSelecionada.setNome(nomeBanda);
+        musicaSelecionada.setNome(nomeMusica);
         musicaSelecionada.setBanda(novaBanda);
         musicaSelecionada.setGenero(novoGenero);
         
@@ -152,6 +154,9 @@ public class MusicasBean implements Serializable {
     }
 
     public String editarMusica(Musica musica) {
+        System.out.println(musica);
+        System.out.println("Id: " + musica.getId());
+        this.musicaSelecionada = musica;
         return "edicaoMusica?faces-redirect=true&id=" + musica.getId();
     }
     
