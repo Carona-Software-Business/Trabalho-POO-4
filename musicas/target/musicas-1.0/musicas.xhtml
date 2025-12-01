@@ -32,47 +32,6 @@
 
             <h:outputText value ="#{musicasBean.mensagem}"/>
 
-            <h:panelGroup rendered="#{usuarioBean.logado}">
-                <h2>Minhas músicas favoritas</h2>
-
-                <h:dataTable value="#{usuarioBean.usuarioLogado.musicasFavoritas}" var="m" border="1" styleClass="music-table">
-
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{m.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Nome</f:facet>
-                            #{m.nome}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Gênero</f:facet>
-                            #{m.genero.nome}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Banda</f:facet>
-                            #{m.banda.nome}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Ações</f:facet>
-
-                        <h:commandButton value="Desfavoritar" action="#{musicasBean.favoritar(m)}"/>
-
-                        <h:panelGroup rendered="#{usuarioBean.usuarioLogado.administrador}">
-                            <h:commandButton value="Editar" action="#{musicasBean.editarMusica(m)}"/>
-                            <h:commandButton value="Remover" action="#{musicasBean.removerMusica(m)}"/>
-                        </h:panelGroup>
-
-                    </h:column>
-
-                </h:dataTable>
-
-                <br/><br/>
-            </h:panelGroup>
-
             <h2>Todas musícas</h2>
             <h:dataTable value="#{musicasBean.musicas}" var="m" border="1" styleClass="music-table">
                 <h:column>
