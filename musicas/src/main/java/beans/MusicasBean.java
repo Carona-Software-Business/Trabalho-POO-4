@@ -149,9 +149,21 @@ public class MusicasBean implements Serializable {
     }
 
     public void removerMusica(Musica musica) {
+
+    if (musicaRepository.musicaTemFavoritos(musica.getId())) {
+        mensagem = "A música não pode ser removida porque está nos favoritos de usuários!";
+        return;
+    }
+
+    try {
         musicaRepository.remover(musica);
+        mensagem = "Música removida com sucesso!";
+    } catch (Exception ex) {
+        mensagem = "Erro inesperado ao remover a música.";
+    } finally {
         listar();
     }
+}
 
     public String editarMusica(Musica musica) {
         System.out.println(musica);

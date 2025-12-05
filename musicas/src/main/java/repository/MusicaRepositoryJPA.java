@@ -35,4 +35,13 @@ public class MusicaRepositoryJPA extends GenericRepositoryJPA<Musica> implements
                 .setParameter("banda", "%" + nomeBanda + "%").getResultList();
     }
 
+    @Override
+    public boolean musicaTemFavoritos(Long idMusica) {
+        String jpql = "SELECT COUNT(u) FROM Usuario u JOIN u.musicasFavoritas m WHERE m.id = :id";
+        Long resultado = em.createQuery(jpql, Long.class)
+                .setParameter("id", idMusica)
+                .getSingleResult();
+        return resultado > 0;
+    }
+
 }

@@ -189,6 +189,4 @@ public class UsuarioBean implements Serializable {
         usuarioRepository.atualizar(usuarioBanco);
         usuarioLogado = usuarioBanco;
     }
-
-
 }

@@ -14,7 +14,7 @@ public class Musica {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(unique = true)
     private String nome;
@@ -69,6 +69,14 @@ public class Musica {
         this.banda = banda;
     }
     
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+    
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,11 +86,11 @@ public class Musica {
             return false;
         }
         Musica m = (Musica) o;
-        return id != 0 && id == m.id;
+        return id != null && id.equals(m.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return id != null ? id.hashCode(): 0;
     }
 }
